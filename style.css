@@ -96,7 +96,7 @@ img{
     margin-top: 86px;
 }
 .items{
-   font-family: Battambang;
+   font-family: Khmer OS Battambang;
    text-align: left;
    padding-left: 2em;
    margin-top: 0;
@@ -107,4 +107,5 @@ img{
 .multi-price{
     font-size: 1.1rem;
     color: red;
+    font-family: battambang !important;
 }   
