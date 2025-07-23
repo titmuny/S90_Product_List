@@ -109,3 +109,9 @@ img{
     color: red;
     font-family: battambang !important;
 }   
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
