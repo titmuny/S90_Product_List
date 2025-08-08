@@ -34166,30 +34166,35 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     
-    <!-- scroll bar -->
+    <!-- category bar scroll buttons + desktop drag scroll -->
     <script>
         const scrollContainer = document.getElementById('categoryButtons');
         const btnLeft = document.querySelector('.scroll-btn.left');
         const btnRight = document.querySelector('.scroll-btn.right');
 
         // Click buttons scroll
-        btnLeft.addEventListener('click', () => {
+        btnLeft?.addEventListener('click', () => {
             scrollContainer.scrollBy({ left: -300, behavior: 'smooth' });
         });
-        btnRight.addEventListener('click', () => {
+        btnRight?.addEventListener('click', () => {
             scrollContainer.scrollBy({ left: 300, behavior: 'smooth' });
         });
 
-        // Drag scroll (mouse + touch)
+        // Desktop drag scroll (mouse only)
         let isDown = false;
-        let startX;
-        let scrollLeft;
+        let startX = 0;
+        let scrollLeft = 0;
 
         scrollContainer.addEventListener('mousedown', (e) => {
             isDown = true;
             scrollContainer.classList.add('grabbing');
-            startX = e.pageX - scrollContainer.offsetLeft;
+            startX = e.pageX - scrollContainer.getBoundingClientRect().left;
             scrollLeft = scrollContainer.scrollLeft;
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDown = false;
+            scrollContainer.classList.remove('grabbing');
         });
 
         scrollContainer.addEventListener('mouseleave', () => {
@@ -34197,29 +34202,12 @@
             scrollContainer.classList.remove('grabbing');
         });
 
-        scrollContainer.addEventListener('mouseup', () => {
-            isDown = false;
-            scrollContainer.classList.remove('grabbing');
-        });
-
         scrollContainer.addEventListener('mousemove', (e) => {
             if (!isDown) return;
             e.preventDefault();
-            const x = e.pageX - scrollContainer.offsetLeft;
-            const walk = (x - startX) * 1.5; // scroll speed
+            const x = e.pageX - scrollContainer.getBoundingClientRect().left;
+            const walk = (x - startX) * 1.5;
             scrollContainer.scrollLeft = scrollLeft - walk;
-        });
-
-        // Touch support
-        let startTouchX = 0;
-        scrollContainer.addEventListener('touchstart', (e) => {
-            startTouchX = e.touches[0].pageX;
-        });
-        scrollContainer.addEventListener('touchmove', (e) => {
-            const x = e.touches[0].pageX;
-            const walk = (x - startTouchX) * 1.5;
-            scrollContainer.scrollLeft -= walk;
-            startTouchX = x;
         });
     </script>
     
