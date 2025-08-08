@@ -135,7 +135,11 @@ img {
   }
 } */
 
-/* Desktop only (navbar-expand-lg) */
+/* Keep first content (banner) below fixed navbar on all breakpoints */
+body {
+  padding-top: 76px; /* mobile/tablet navbar height */
+}
+
 @media (min-width: 992px) {
   body {
     padding-top: 70px; /* real desktop navbar height */
@@ -305,6 +309,9 @@ img {
 
 .scroll-btn.left { left: 10px; }
 .scroll-btn.right { right: 10px; }
+
+
+
 
 
 
