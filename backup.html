@@ -1,0 +1,357 @@
+<!-- <div class="container-fluid py-4 mt-custom bg-dark-subtle" style="background-color: #00ffc3;">
+  <div class="container text-center">
+    <div class="d-flex justify-content-center flex-wrap mt-3" 
+         id="categoryButtons" style="font-family: poppins, Khmer OS Battambang;">
+
+        <button class="btn btn-outline-primary rounded-pill m-2">All</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">KEY-KEY</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">Laser Distance Meter-LSDT</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">Motor-DLMT</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">Solar-Solar</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">Survay-SVY</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">Wall & Roof-WR</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">Welding Magnet Support-WDMN</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">ក្តារ-KDAR</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">គ្រឿងការ៉ូ-TLSC</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">គ្រឿងជ័រ-PLAS</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">គ្រឿងឈើ-WDST</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">គ្រឿងទឹក-WSP</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">គ្រឿងបន្លាស់-TMOR</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">គ្រឿងភ្លើង-ELT</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">គ្រឿងសំអាត-CLEAN</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">ឆុត-SET</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">ជើងទ្រ រឹត-STSP</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">ដែក-Iron</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">ដែក-MTSP</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">ថ្នាំ-PAN</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">ថ្ម បេតុង-CCSP</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">ទុយោ-TUBE</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">ទុយោរទឹកស្អាត-HDPE</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">បន្ទាត់-RLSP</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">ផ្លែតំណ-ADA</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">ផ្សេងៗ-OTH</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">វីស-វីស</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">ស្កុត&កាវ-SCOT</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">អគ្គីភ័យ-fire</button>
+        <button class="btn btn-outline-primary rounded-pill m-2">អំពូល-LIGHT</button>
+    </div>
+  </div>
+</div> -->
+
+
+
+<!-- <script>
+        document.querySelectorAll('.category-filter').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const cat = this.getAttribute('data-category');
+                document.querySelectorAll('.card').forEach(card => {
+                    const img = card.querySelector('img');
+                    if (!img) return;
+                    const src = img.getAttribute('src') || '';
+
+                    if (cat === 'All') {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'ADA' && src.includes('ផ្លែតំណ-ADA')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'KEY' && src.includes('KEY-KEY')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'Laser Distance Meter-LSDT' && src.includes('Laser Distance Meter-LSDT')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'Motor-DLMT' && src.includes('Motor-DLMT')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'Solar-Solar' && src.includes('Solar-Solar')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'Survay-SVY' && src.includes('Survay-SVY')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'wall&roof-WR' && src.includes('wall&roof-WR')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'Welding Magnet Support-WDMN' && src.includes('Welding Magnet Support-WDMN')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'ក្តារ-KDAR' && src.includes('ក្តារ-KDAR')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'គ្រឿងការ៉ូ-TLSC' && src.includes('គ្រឿងការ៉ូ-TLSC')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'គ្រឿងជ័រ-PLAS' && src.includes('គ្រឿងជ័រ-PLAS')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'គ្រឿងឈើ-WDST' && src.includes('គ្រឿងឈើ-WDST')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'គ្រឿងទឹក-WSP' && src.includes('គ្រឿងទឹក-WSP')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'គ្រឿងបន្លាស់-TMOR' && src.includes('គ្រឿងបន្លាស់-TMOR')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'គ្រឿងភ្លើង-ELT' && src.includes('គ្រឿងភ្លើង-ELT')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'គ្រឿងសំអាត-CLEAN' && src.includes('គ្រឿងសំអាត-CLEAN')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'ឆុត-SET' && src.includes('ឆុត-SET')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'ជើងទ្រ រឹត-STSP' && src.includes('ជើងទ្រ រឹត-STSP')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'ដែក-Iron' && src.includes('ដែក-Iron')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'ដែក-MTSP' && src.includes('ដែក-MTSP')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'ថ្នាំ-PAN' && src.includes('ថ្នាំ-PAN')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'ថ្ម បេតុង-CCSP' && src.includes('ថ្ម បេតុង-CCSP')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'ទុយោ-TUBE' && src.includes('ទុយោ-TUBE')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'ទុយោរទឹកស្អាត-HDPE' && src.includes('ទុយោរទឹកស្អាត-HDPE')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'បន្ទាត់-RLSP' && src.includes('បន្ទាត់-RLSP')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'ផ្សេងៗ-OTH' && src.includes('ផ្សេងៗ-OTH')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'វីស-វីស' && src.includes('វីស-វីស')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'ស្កុត&កាវ-SCOT' && src.includes('ស្កុត&កាវ-SCOT')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'អគ្គីភ័យ-fire' && src.includes('អគ្គីភ័យ-fire')) {
+                        card.parentElement.style.display = '';
+                    } else if (cat === 'អំពូល-LIGHT' && src.includes('អំពូល-LIGHT')) {
+                        card.parentElement.style.display = '';
+                    } else {
+                        card.parentElement.style.display = 'none';
+                    }
+                });
+
+                // Close offcanvas after click
+                const sidebar = bootstrap.Offcanvas.getInstance(document.getElementById('sidebarMenu'));
+                if (sidebar) {
+                    sidebar.hide();
+                }
+            });
+        });
+    </script> -->
+
+
+
+
+    <!-- <script>
+  // Highlight selected button
+  document.querySelectorAll('#categoryButtons .btn').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('#categoryButtons .btn').forEach(btn => 
+        btn.classList.remove('active')
+      );
+      button.classList.add('active');
+    });
+  });
+</script> -->
+
+@media (min-width: 992px) {
+
+  .product-table-section,
+  table {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border-spacing: 0 !important;
+  }
+
+  .container,
+  .container-fluid {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+
+
+
+
+/* Make category bar sticky */
+  .category-bar {
+  position: sticky;
+  top: 70px; /* adjust based on your navbar height */
+  z-index: 1020;
+  background: radial-gradient(
+      circle at 30% 20%,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.1) 100%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(142, 205, 134, 0.35) 0%,
+      rgba(142, 205, 134, 0.15) 100%
+    );
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.2),
+    0 4px 20px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Liquid Glass Background</title>
+<style>
+  /* Page reset */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html,body { height: 100%; font-family: Inter, system-ui, Arial; }
+
+  /* Full-screen container */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(180deg, #070617 0%, #0f1224 50%, #071028 100%);
+    color: #fff;
+  }
+
+  /* SVG goo wrapper: apply goo filter to make blobs "liquid" */
+  .goo-wrap {
+    position: absolute;
+    inset: -15%;
+    pointer-events: none;
+    filter: saturate(130%);
+    z-index: 0;
+  }
+  /* The group with the goo filter applied */
+  .goo {
+    width: 100%;
+    height: 100%;
+    filter: url(#goo);
+  }
+
+  /* Individual blobs (large, blurred, animated) */
+  .blob {
+    position: absolute;
+    width: 40vmax;
+    height: 40vmax;
+    border-radius: 50%;
+    transform: translate3d(0,0,0);
+    mix-blend-mode: screen;
+    opacity: 0.95;
+    will-change: transform;
+    filter: blur(26px);
+  }
+
+  /* color variants for visual interest */
+  .b1 { background: radial-gradient(circle at 25% 25%, #ff6b6b 0%, #ff2d95 40%, rgba(255,45,149,0.0) 70%); top: -10%; left: -10%; animation: move1 16s linear infinite; }
+  .b2 { background: radial-gradient(circle at 30% 30%, #4cc9f0 0%, #4361ee 40%, rgba(67,97,238,0) 70%); bottom: -15%; right: -5%; animation: move2 18s linear infinite; }
+  .b3 { background: radial-gradient(circle at 40% 40%, #ffd166 0%, #ff9f1c 35%, rgba(255,159,28,0) 70%); top: 10%; right: -5%; animation: move3 20s linear infinite; }
+
+  /* subtle blob scale/rotate animations to feel organic */
+  @keyframes move1 {
+    0% { transform: translate3d(0,0,0) scale(1) rotate(0deg); }
+    50% { transform: translate3d(8vw,6vh,0) scale(1.05) rotate(6deg); }
+    100% { transform: translate3d(0,0,0) scale(1) rotate(0deg); }
+  }
+  @keyframes move2 {
+    0% { transform: translate3d(0,0,0) scale(1); }
+    50% { transform: translate3d(-10vw,-8vh,0) scale(1.08); }
+    100% { transform: translate3d(0,0,0) scale(1); }
+  }
+  @keyframes move3 {
+    0% { transform: translate3d(0,0,0) scale(1); }
+    50% { transform: translate3d(-6vw,10vh,0) scale(0.98); }
+    100% { transform: translate3d(0,0,0) scale(1); }
+  }
+
+  /* Glass card on top */
+  .glass {
+    position: relative;
+    z-index: 5;
+    width: min(920px, 92%);
+    max-width: 920px;
+    padding: 2.2rem;
+    border-radius: 18px;
+    backdrop-filter: blur(10px) saturate(130%);
+    -webkit-backdrop-filter: blur(10px) saturate(130%);
+    background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+    color: #f7fafc;
+  }
+
+  .glass h1 { font-size: clamp(1.4rem, 2.6vw, 2.4rem); margin-bottom: .35rem; }
+  .glass p { opacity: 0.9; line-height: 1.45; margin-bottom: 1rem; }
+
+  /* fallback if backdrop-filter unsupported: reduce blur and increase contrast */
+  @supports not ((-webkit-backdrop-filter: blur(0px)) or (backdrop-filter: blur(0px))) {
+    .glass {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      backdrop-filter: none;
+    }
+  }
+
+  /* small caption */
+  .meta { font-size: .9rem; opacity: .85; margin-top: .5rem; display:flex; gap:.6rem; flex-wrap:wrap; }
+
+  /* make sure content is readable on tiny screens */
+  @media (max-width:520px) {
+    .blob { filter: blur(20px); }
+    .glass { padding: 1.4rem; border-radius: 14px; }
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <!-- gooey animated blobs using an SVG filter -->
+    <div class="goo-wrap" aria-hidden="true">
+      <!-- SVG filter; the feGaussianBlur + feColorMatrix creates gooey merging -->
+      <svg width="0" height="0" style="position:absolute">
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="24" result="blur" />
+            <!-- amplify alpha channel to make blobs merge -->
+            <feColorMatrix in="blur" mode="matrix"
+              values="1 0 0 0 0
+                      0 1 0 0 0
+                      0 0 1 0 0
+                      0 0 0 24 -7" result="goo" />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+          </filter>
+        </defs>
+      </svg>
+
+      <!-- Apply the filter to this group -->
+      <div class="goo">
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
+        <div class="blob b3"></div>
+      </div>
+    </div>
+
+    <!-- Foreground frosted 'glass' panel -->
+    <section class="glass">
+      <h1>Liquid glass background</h1>
+      <p>Animated, gooey color blobs behind a frosted glass panel. Works best in modern Chromium, Safari and Firefox (newer versions).</p>
+      <div class="meta">
+        <span>✨ CSS-only animations</span>
+        <span>⚙️ Backdrop-filter frosted glass</span>
+        <span>🧪 SVG goo filter</span>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
