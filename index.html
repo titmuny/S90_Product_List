@@ -8,6 +8,7 @@
     <title>S90</title>
     <link rel="icon" href="Logo PNG.png" type="image/png">
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
@@ -118,7 +119,7 @@
     </div>
     </div>
 
-    <script>
+    <!-- <script>
         document.querySelectorAll('.category-filter').forEach(link => {
             link.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -203,7 +204,7 @@
                 }
             });
         });
-    </script>
+    </script> -->
 
     </ul>
     </div>
@@ -221,37 +222,37 @@
     <!-- Scrollable Buttons -->
     <div class="d-flex overflow-auto no-scrollbar px-5" id="categoryButtons" 
          style="scroll-behavior: smooth; font-family: Poppins, 'Khmer OS Battambang';">
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="All">All</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0 active" data-category="All">All</button>
       <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="KEY-KEY">KEY-KEY</button>
       <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="Laser Distance Meter-LSDT">Laser Distance Meter-LSDT</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">Motor-DLMT</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">Solar-Solar</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">Survay-SVY</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">Wall & Roof-WR</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">Welding Magnet Support-WDMN</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">ក្តារ-KDAR</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">គ្រឿងការ៉ូ-TLSC</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">គ្រឿងជ័រ-PLAS</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">គ្រឿងឈើ-WDST</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">គ្រឿងទឹក-WSP</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">គ្រឿងបន្លាស់-TMOR</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">គ្រឿងភ្លើង-ELT</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">គ្រឿងសំអាត-CLEAN</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">ឆុត-SET</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">ជើងទ្រ រឹត-STSP</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">ដែក-Iron</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">ដែក-MTSP</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">ថ្នាំ-PAN</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">ថ្ម បេតុង-CCSP</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">ទុយោ-TUBE</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">ទុយោរទឹកស្អាត-HDPE</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">បន្ទាត់-RLSP</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">ផ្លែតំណ-ADA</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">ផ្សេងៗ-OTH</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">វីស-វីស</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">ស្កុត&កាវ-SCOT</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">អគ្គីភ័យ-fire</button>
-      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0">អំពូល-LIGHT</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="Motor-DLMT">Motor-DLMT</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="Solar-Solar">Solar-Solar</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="Survay-SVY">Survay-SVY</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="Wall & Roof-WR">Wall & Roof-WR</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="Welding Magnet Support-WDMN">Welding Magnet Support-WDMN</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="ក្តារ-KDAR">ក្តារ-KDAR</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="គ្រឿងការ៉ូ-TLSC">គ្រឿងការ៉ូ-TLSC</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="គ្រឿងជ័រ-PLAS">គ្រឿងជ័រ-PLAS</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="គ្រឿងឈើ-WDST">គ្រឿងឈើ-WDST</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="គ្រឿងទឹក-WSP">គ្រឿងទឹក-WSP</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="គ្រឿងបន្លាស់-TMOR">គ្រឿងបន្លាស់-TMOR</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="គ្រឿងភ្លើង-ELT">គ្រឿងភ្លើង-ELT</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="គ្រឿងសំអាត-CLEAN">គ្រឿងសំអាត-CLEAN</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="ឆុត-SET">ឆុត-SET</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="ជើងទ្រ រឹត-STSP">ជើងទ្រ រឹត-STSP</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="ដែក-Iron">ដែក-Iron</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="ដែក-MTSP">ដែក-MTSP</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="ថ្នាំ-PAN">ថ្នាំ-PAN</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="ថ្ម បេតុង-CCSP">ថ្ម បេតុង-CCSP</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="ទុយោ-TUBE">ទុយោ-TUBE</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="ទុយោរទឹកស្អាត-HDPE">ទុយោរទឹកស្អាត-HDPE</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="បន្ទាត់-RLSP">បន្ទាត់-RLSP</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="ផ្លែតំណ-ADA">ផ្លែតំណ-ADA</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="ផ្សេងៗ-OTH">ផ្សេងៗ-OTH</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="វីស-វីស">វីស-វីស</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="ស្កុត&កាវ-SCOT">ស្កុត&កាវ-SCOT</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="អគ្គីភ័យ-fire">អគ្គីភ័យ-fire</button>
+      <button class="btn btn-outline-primary rounded-pill m-2 category-filter flex-shrink-0" data-category="អំពូល-LIGHT">អំពូល-LIGHT</button>
     </div>
 
     <!-- Right Button -->
@@ -261,6 +262,18 @@
 
   </div>
 </div>
+
+<!-- <script>
+  // Highlight active category button
+  document.querySelectorAll('.category-filter').forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Remove active class from all buttons
+      document.querySelectorAll('.category-filter').forEach(b => b.classList.remove('active'));
+      // Add active class to the clicked button
+      this.classList.add('active');
+    });
+  });
+</script> -->
 
     <div id="carouselExampleIndicators" class="carousel slide img-fluid" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -33361,10 +33374,10 @@
                 </div>
             </div>
 
-            <!-- Finish 27/09/2025 -->
-
         </div>
     </div>
+ 
+    <!-- Finish 27/09/2025 -->
 
     <button onclick="scrollToTop()" id="goToTopBtn" title="Go to top"
         style="position: fixed; bottom: 20px; right: 20px; display: none; z-index: 99; background-color: #007bff; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; color: white;">
@@ -33630,6 +33643,109 @@
             startTouchX = x;
         });
     </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const buttons = document.querySelectorAll('.category-filter');
+  const cardElements = Array.from(document.querySelectorAll('.card'));
+
+  if (!buttons.length) {
+    console.warn('No .category-filter buttons found.');
+    return;
+  }
+  if (!cardElements.length) {
+    console.warn('No .card elements found. Make sure your product cards have class="card".');
+  }
+
+  // helper: find the wrapper to show/hide (closest bootstrap column or direct parent)
+  function findWrapper(card) {
+    // prefer nearest bootstrap column (col-*)
+    let wrapper = card.closest('[class*="col-"]');
+    if (wrapper) return wrapper;
+    // otherwise use immediate parent
+    return card.parentElement || card;
+  }
+
+  // apply initial visibility (optional: show all)
+  function resetAllVisible() {
+    cardElements.forEach(card => {
+      const wrapper = findWrapper(card);
+      if (wrapper) wrapper.style.display = '';
+    });
+  }
+  resetAllVisible();
+
+  // click handler
+  function onClickHandler(e) {
+    e.preventDefault();
+    const btn = e.currentTarget;
+    const cat = (btn.getAttribute('data-category') || '').trim();
+
+    // highlight
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    console.info('Filtering by category:', cat);
+
+    cardElements.forEach(card => {
+      const wrapper = findWrapper(card);
+      if (!wrapper) return;
+
+      // 1) prefer explicit data-category on card
+      const cardData = (card.getAttribute('data-category') || '').trim();
+      if (cat === 'All' || cat === '' ) {
+        wrapper.style.display = '';
+        return;
+      }
+
+      // match logic:
+      // - If card has data-category, compare ignoring case and trim
+      // - Else if it has an <img>, check src includes category (original approach)
+      // - Use case-insensitive includes and replace multiple whitespace
+      const normalize = s => (s || '').toString().normalize('NFKC').replace(/\s+/g, ' ').trim().toLowerCase();
+
+      const nCat = normalize(cat);
+
+      let matched = false;
+      if (cardData) {
+        matched = normalize(cardData) === nCat || normalize(cardData).includes(nCat) || nCat.includes(normalize(cardData));
+      } else {
+        const img = card.querySelector('img');
+        const src = img ? (img.getAttribute('src') || '') : '';
+        matched = src && normalize(src).includes(nCat);
+      }
+
+      // show or hide
+      wrapper.style.display = matched ? '' : 'none';
+    });
+
+    // close offcanvas if exists
+    try {
+      const off = document.getElementById('sidebarMenu');
+      if (off && bootstrap && bootstrap.Offcanvas) {
+        const inst = bootstrap.Offcanvas.getInstance(off);
+        if (inst) inst.hide();
+      }
+    } catch (err) {
+      // ignore bootstrap errors
+      console.debug('Offcanvas hide error (safe to ignore):', err);
+    }
+  }
+
+  // attach listeners
+  buttons.forEach(b => b.addEventListener('click', onClickHandler));
+
+  // debug: print first few card data-categories and img srcs
+  console.group('Category filter debug info');
+  cardElements.slice(0, 10).forEach((card, i) => {
+    const cd = card.getAttribute('data-category') || '(no data-category)';
+    const img = card.querySelector('img');
+    const src = img ? (img.getAttribute('src') || '(no src)') : '(no img)';
+    console.log(`#${i}`, cd, src);
+  });
+  console.groupEnd();
+});
+</script>
 
 </body>
 </html>
