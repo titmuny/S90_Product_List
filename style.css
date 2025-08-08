@@ -76,12 +76,12 @@
 .price{
   color: red;
 }
-/* @media (min-width: 992px) {
+@media (min-width: 992px) {
     .col-lg-3 {
         flex: 0 0 auto;
         width: 20%;
     }
-}  */
+} 
 .card-body{
     padding: 5px 0px 0px 0px;
 }
@@ -114,4 +114,9 @@ img {
   height: auto;
   display: block;
 }
+.numbering{
+    font-size: 1.1rem;
+    color: rgb(30, 0, 255);
+    font-family: battambang !important;
+}   
 
