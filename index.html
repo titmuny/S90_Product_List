@@ -91,14 +91,13 @@
     <div class="offcanvas-body m-1 px-3 overflow-auto">
         <ul class="nav flex-column gap-1 sidebar-links" style="font-family: poppins, Khmer OS Battambang;">
             <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="All">All</a></li>
-            <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="ADA">ផ្លែតំណ-ADA</a></li>
-            <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="KEY">KEY-KEY</a></li>
-            <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="Laser Distance Meter-LSDT">Laser Distance Meter-LSDT</a></li>
-            <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="Motor-DLMT">Motor-DLMT</a></li>
-            <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="Solar-Solar">Solar-Solar</a></li>
-            <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="Survay-SVY">Survay-SVY</a></li>
-            <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="wall&roof-WR">Wall & Roof-WR</a></li>
-            <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="Welding Magnet Support-WDMN">Welding Magnet Support-WDMN</a></li>
+            <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="KEY">សោរ-KEY</a></li>
+            <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="Laser Distance Meter-LSDT">ឡាស៊ែរ-LSDT</a></li>
+            <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="Motor-DLMT">ម៉ូទ័រ-DLMT</a></li>
+            <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="Solar-Solar">សូឡា-Solar</a></li>
+            <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="Survay-SVY">សេវេ-SVY</a></li>
+            <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="wall&roof-WR">គ្រឿងដំបូល-WR</a></li>
+            <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="Welding Magnet Support-WDMN">គ្រឿងផ្សារដែក-WDMN</a></li>
             <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="ក្តារ-KDAR">ក្តារ-KDAR</a></li>
             <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="គ្រឿងការ៉ូ-TLSC">គ្រឿងការ៉ូ-TLSC</a></li>
             <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="គ្រឿងជ័រ-PLAS">គ្រឿងជ័រ-PLAS</a></li>
@@ -116,6 +115,7 @@
             <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="ទុយោ-TUBE">ទុយោ-TUBE</a></li>
             <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="ទុយោរទឹកស្អាត-HDPE">ទុយោរទឹកស្អាត-HDPE</a></li>
             <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="បន្ទាត់-RLSP">បន្ទាត់-RLSP</a></li>
+            <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="ADA">ផ្លែតំណ-ADA</a></li>
             <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="ផ្សេងៗ-OTH">ផ្សេងៗ-OTH</a></li>
             <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="វីស-វីស">វីស-វីស</a></li>
             <li class="nav-item"><a class="nav-link text-black sidebar-hover category-filter" href="#" data-category="ស្កុត&កាវ-SCOT">ស្កុត&កាវ-SCOT</a></li>
@@ -33795,108 +33795,163 @@
         });
     </script>
     
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const buttons = document.querySelectorAll('.category-filter');
-            const cardElements = Array.from(document.querySelectorAll('.card'));
 
-            if (!buttons.length) {
-                console.warn('No .category-filter buttons found.');
+    <!-- categories filter + scroll auto-highlight -->
+   
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const buttons = document.querySelectorAll('.category-filter');
+    const cards = Array.from(document.querySelectorAll('.card'));
+
+    if (!buttons.length || !cards.length) return;
+
+    // =========================
+    // HELPERS
+    // =========================
+
+    function findWrapper(card) {
+        return card.closest('[class*="col-"]') || card.parentElement || card;
+    }
+
+    function normalize(str) {
+        return (str || '')
+            .toString()
+            .normalize('NFKC')
+            .replace(/\s+/g, ' ')
+            .trim()
+            .toLowerCase();
+    }
+
+    function getCategoryFromCard(card) {
+        const img = card.querySelector('img');
+        if (!img) return null;
+
+        const src = img.getAttribute('src') || '';
+        const parts = src.split('/');
+
+        if (parts.length > 1) {
+            return parts[0].trim();
+        }
+
+        return null;
+    }
+
+    // =========================
+    // CLICK FILTER
+    // =========================
+
+    function filterByCategory(category) {
+
+        const normalizedCategory = normalize(category);
+
+        cards.forEach(card => {
+
+            const wrapper = findWrapper(card);
+            if (!wrapper) return;
+
+            if (normalizedCategory === 'all') {
+                wrapper.style.display = '';
                 return;
             }
-            if (!cardElements.length) {
-                console.warn('No .card elements found. Make sure your product cards have class="card".');
+
+            const cardCategory = getCategoryFromCard(card);
+            const normalizedCardCategory = normalize(cardCategory);
+
+            if (normalizedCardCategory === normalizedCategory) {
+                wrapper.style.display = '';
+            } else {
+                wrapper.style.display = 'none';
             }
 
-            // helper: find the wrapper to show/hide (closest bootstrap column or direct parent)
-            function findWrapper(card) {
-                // prefer nearest bootstrap column (col-*)
-                let wrapper = card.closest('[class*="col-"]');
-                if (wrapper) return wrapper;
-                // otherwise use immediate parent
-                return card.parentElement || card;
-            }
+        });
 
-            // apply initial visibility (optional: show all)
-            function resetAllVisible() {
-                cardElements.forEach(card => {
-                    const wrapper = findWrapper(card);
-                    if (wrapper) wrapper.style.display = '';
-                });
-            }
-            resetAllVisible();
-
-            // click handler
-            function onClickHandler(e) {
-                e.preventDefault();
-                const btn = e.currentTarget;
-                const cat = (btn.getAttribute('data-category') || '').trim();
-
-                // highlight
-                buttons.forEach(b => b.classList.remove('active'));
+        // highlight active button
+        buttons.forEach(btn => {
+            if (normalize(btn.getAttribute('data-category')) === normalizedCategory) {
                 btn.classList.add('active');
 
-                console.info('Filtering by category:', cat);
-
-                cardElements.forEach(card => {
-                    const wrapper = findWrapper(card);
-                    if (!wrapper) return;
-
-                    // 1) prefer explicit data-category on card
-                    const cardData = (card.getAttribute('data-category') || '').trim();
-                    if (cat === 'All' || cat === '') {
-                        wrapper.style.display = '';
-                        return;
-                    }
-
-                    // match logic:
-                    // - If card has data-category, compare ignoring case and trim
-                    // - Else if it has an <img>, check src includes category (original approach)
-                    // - Use case-insensitive includes and replace multiple whitespace
-                    const normalize = s => (s || '').toString().normalize('NFKC').replace(/\s+/g, ' ').trim().toLowerCase();
-
-                    const nCat = normalize(cat);
-
-                    let matched = false;
-                    if (cardData) {
-                        matched = normalize(cardData) === nCat || normalize(cardData).includes(nCat) || nCat.includes(normalize(cardData));
-                    } else {
-                        const img = card.querySelector('img');
-                        const src = img ? (img.getAttribute('src') || '') : '';
-                        matched = src && normalize(src).includes(nCat);
-                    }
-
-                    // show or hide
-                    wrapper.style.display = matched ? '' : 'none';
+                btn.scrollIntoView({
+                    behavior: "smooth",
+                    inline: "center",
+                    block: "nearest"
                 });
 
-                // close offcanvas if exists
-                try {
-                    const off = document.getElementById('sidebarMenu');
-                    if (off && bootstrap && bootstrap.Offcanvas) {
-                        const inst = bootstrap.Offcanvas.getInstance(off);
-                        if (inst) inst.hide();
-                    }
-                } catch (err) {
-                    // ignore bootstrap errors
-                    console.debug('Offcanvas hide error (safe to ignore):', err);
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        // close offcanvas if exists
+        try {
+            const off = document.getElementById('sidebarMenu');
+            if (off && bootstrap && bootstrap.Offcanvas) {
+                const inst = bootstrap.Offcanvas.getInstance(off);
+                if (inst) inst.hide();
+            }
+        } catch (err) {}
+    }
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const category = this.getAttribute('data-category');
+            filterByCategory(category);
+        });
+    });
+
+    // =========================
+    // AUTO HIGHLIGHT ON SCROLL
+    // =========================
+
+    window.addEventListener('scroll', function () {
+
+        let currentCategory = null;
+
+        for (let card of cards) {
+
+            const wrapper = findWrapper(card);
+            if (!wrapper || wrapper.style.display === 'none') continue;
+
+            const rect = wrapper.getBoundingClientRect();
+
+            if (rect.top >= 0 && rect.top <= window.innerHeight * 0.35) {
+                currentCategory = getCategoryFromCard(card);
+                break;
+            }
+        }
+
+        if (!currentCategory) return;
+
+        const normalizedCurrent = normalize(currentCategory);
+
+        buttons.forEach(btn => {
+
+            const btnCategory = normalize(btn.getAttribute('data-category'));
+
+            if (btnCategory === normalizedCurrent) {
+
+                if (!btn.classList.contains('active')) {
+                    btn.classList.add('active');
+
+                    btn.scrollIntoView({
+                        behavior: "smooth",
+                        inline: "center",
+                        block: "nearest"
+                    });
                 }
+
+            } else {
+                btn.classList.remove('active');
             }
 
-            // attach listeners
-            buttons.forEach(b => b.addEventListener('click', onClickHandler));
-
-            // debug: print first few card data-categories and img srcs
-            console.group('Category filter debug info');
-            cardElements.slice(0, 10).forEach((card, i) => {
-                const cd = card.getAttribute('data-category') || '(no data-category)';
-                const img = card.querySelector('img');
-                const src = img ? (img.getAttribute('src') || '(no src)') : '(no img)';
-                console.log(`#${i}`, cd, src);
-            });
-            console.groupEnd();
         });
-    </script>
+
+    });
+
+});
+</script>
+
 
     <!-- automatically adjust category bar position -->
     <script>
