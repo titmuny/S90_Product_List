@@ -33330,6 +33330,463 @@
         });
     </script>
 
+    <!-- Order -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = Array.from(document.querySelectorAll('.card.box:not(.hero-banner-card)'));
+            if (!cards.length || !window.bootstrap) return;
+
+            let modalEl = document.getElementById('productQuickViewModal');
+
+            if (!modalEl) {
+                modalEl = document.createElement('div');
+                modalEl.className = 'modal fade';
+                modalEl.id = 'productQuickViewModal';
+                modalEl.tabIndex = -1;
+                modalEl.setAttribute('aria-hidden', 'true');
+                modalEl.innerHTML = `
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content border-0 shadow-lg">
+                            <div class="modal-header">
+                                <h5 class="modal-title quick-view-title mb-0" id="quickViewTitle">Product details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-0">
+                                <div class="row g-0">
+                                    <div class="col-md-5 quick-view-image-wrap d-flex align-items-center justify-content-center">
+                                        <img id="quickViewImage" class="img-fluid quick-view-image" src="" alt="">
+                                    </div>
+                                    <div class="col-md-7 p-4">
+                                        <p id="quickViewSku" class="quick-view-sku text-dark mb-2"></p>
+                                        <div id="quickViewPrice" class="fw-bold quick-view-price mb-3"></div>
+                                        <div id="quickViewDetails" class="quick-view-details text-dark"></div>
+                                        <div class="quick-view-order-tools">
+                                            <div class="quick-view-qty">
+                                                <p class="quick-view-qty-label">Qty</p>
+                                                <div id="quickViewQtyControls" class="quick-view-qty-controls"></div>
+                                            </div>
+                                            <div id="quickViewSummary" class="quick-view-summary"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <a id="quickViewOrderBtn" class="btn fw-semibold quick-view-order-btn" href="tel:010288993">
+                                    <i class="bi bi-cart3"></i>
+                                    <span>Order Now</span>
+                                </a>
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modalEl);
+            }
+
+            const modal = new bootstrap.Modal(modalEl);
+            const titleEl = modalEl.querySelector('#quickViewTitle');
+            const imageEl = modalEl.querySelector('#quickViewImage');
+            const skuEl = modalEl.querySelector('#quickViewSku');
+            const priceEl = modalEl.querySelector('#quickViewPrice');
+            const detailsEl = modalEl.querySelector('#quickViewDetails');
+            const orderBtn = modalEl.querySelector('#quickViewOrderBtn');
+            const qtyControlsEl = modalEl.querySelector('#quickViewQtyControls');
+            const summaryEl = modalEl.querySelector('#quickViewSummary');
+            let currentQty = 1;
+            let currentSelection = null;
+            let currentSelections = [];
+            let currentInfo = null;
+            let currentSelectionQuantities = {};
+
+            function escapeHtml(value) {
+                return String(value || '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
+
+            function extractOptions(priceHtml) {
+                const plainText = String(priceHtml || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+                if (/^price\s*:/i.test(plainText)) {
+                    return [];
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = priceHtml || '';
+                const items = Array.from(wrapper.querySelectorAll('li'));
+
+                const parsedItems = items.map(function (item) {
+                    const clone = item.cloneNode(true);
+                    const priceNode = clone.querySelector('.multi-price');
+                    const priceText = priceNode ? priceNode.textContent.trim().replace(/^=\s*/, '') : '';
+                    if (priceNode) priceNode.remove();
+
+                    const labelText = clone.textContent.replace(/=\s*\$?\s*[\d.,]+/g, '').trim();
+                    return {
+                        label: labelText || 'Option',
+                        price: priceText || 'Contact us'
+                    };
+                }).filter(function (item) {
+                    return item.label || item.price;
+                });
+
+                if (parsedItems.length) {
+                    return parsedItems;
+                }
+
+                return String(priceHtml || '')
+                    .split(/<br\s*\/?>/i)
+                    .map(function (lineHtml) {
+                        const line = lineHtml
+                            .replace(/<\/?(ul|li)\b[^>]*>/gi, ' ')
+                            .replace(/<[^>]+>/g, ' ')
+                            .replace(/\s+/g, ' ')
+                            .trim();
+                        const priceMatch = line.match(/=\s*\$?\s*[\d.,]+/);
+                        const priceText = priceMatch ? priceMatch[0].replace(/^=\s*/, '').trim() : '';
+                        const labelText = line
+                            .replace(/^\d+\.\s*/, '')
+                            .replace(/=\s*\$?\s*[\d.,]+/g, '')
+                            .trim();
+
+                        return {
+                            label: labelText || 'Option',
+                            price: priceText || 'Contact us'
+                        };
+                    })
+                    .filter(function (item) {
+                        return (item.label || item.price) && !/^price\s*:/i.test(item.label || '');
+                    });
+            }
+
+            function parsePriceValue(text) {
+                const normalized = String(text || '').replace(/,/g, '');
+                const match = normalized.match(/-?\d+(?:\.\d+)?/);
+                return match ? Number(match[0]) : 0;
+            }
+
+            function formatPriceValue(value) {
+                return '$' + Number(value || 0).toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+            }
+
+            function extractSinglePrice(priceHtml) {
+                const text = String(priceHtml || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+                return text.replace(/^Price:\s*/i, '').trim() || 'Contact us';
+            }
+
+            function hasKnownPrice(text) {
+                return !/contact us/i.test(String(text || ''));
+            }
+
+            function getRenderedSelections() {
+                return currentSelections.length ? currentSelections : (currentSelection ? [currentSelection] : []);
+            }
+
+            function getVisibleSelections() {
+                const selections = getRenderedSelections();
+                return currentInfo?.options?.length
+                    ? selections.filter(function (item) {
+                        return getSelectionQty(item) > 0;
+                    })
+                    : selections;
+            }
+
+            function getTotalQty() {
+                return currentInfo?.options?.length
+                    ? getVisibleSelections().reduce(function (sum, item) {
+                        return sum + getSelectionQty(item);
+                    }, 0)
+                    : currentQty;
+            }
+
+            function getGrandTotal() {
+                const selections = getVisibleSelections();
+                return selections.reduce(function (sum, item) {
+                    const qty = currentInfo?.options?.length ? getSelectionQty(item) : currentQty;
+                    return sum + (parsePriceValue(item.price) * qty);
+                }, 0);
+            }
+
+            function getImageShareUrl() {
+                if (!currentInfo?.imageSrc) return '';
+                try {
+                    return new URL(currentInfo.imageSrc, window.location.href).href;
+                } catch (error) {
+                    return currentInfo.imageSrc;
+                }
+            }
+
+            function buildTelegramOrderText() {
+                const selections = getVisibleSelections();
+                const lines = [
+                    'Order Summary',
+                    'Product: ' + (currentInfo?.title || 'Product'),
+                    'SKU: ' + (currentInfo?.sku || 'N/A')
+                ];
+
+                if (currentInfo?.options?.length) {
+                    lines.push('Items:');
+                    selections.forEach(function (item) {
+                        const qty = getSelectionQty(item);
+                        const lineTotal = parsePriceValue(item.price) * qty;
+                        lines.push('- ' + (item.label || 'Option') + ' | Qty: ' + qty + ' | Total: ' + (hasKnownPrice(item.price) ? formatPriceValue(lineTotal) : (item.price || 'Contact us')));
+                    });
+                } else {
+                    lines.push('Qty: ' + currentQty);
+                    lines.push('Price: ' + (hasKnownPrice(currentSelection?.price) ? formatPriceValue(parsePriceValue(currentSelection?.price) * currentQty) : (currentSelection?.price || 'Contact us')));
+                }
+
+                lines.push('Total Qty: ' + getTotalQty());
+                lines.push('Grand Total: ' + formatPriceValue(getGrandTotal()));
+
+                const imageUrl = getImageShareUrl();
+                if (imageUrl) {
+                    lines.push('Product Image: ' + imageUrl);
+                }
+
+                return lines.join('\n');
+            }
+
+            function getSelectionKey(item) {
+                return [item?.label || 'Option', item?.price || 'Contact us'].join('||');
+            }
+
+            function getSelectionQty(item) {
+                const key = getSelectionKey(item);
+                const storedQty = Object.prototype.hasOwnProperty.call(currentSelectionQuantities, key)
+                    ? currentSelectionQuantities[key]
+                    : 1;
+                return Math.max(0, storedQty);
+            }
+
+            function renderQtyControls() {
+                const displayedQty = currentInfo?.options?.length && currentSelection
+                    ? getSelectionQty(currentSelection)
+                    : currentQty;
+                qtyControlsEl.innerHTML = `
+                    <div class="d-inline-flex align-items-center border rounded-pill overflow-hidden">
+                        <button type="button" class="quick-view-qty-btn px-3 border-0 bg-transparent" data-qty-action="minus" aria-label="Decrease quantity">-</button>
+                        <span class="quick-view-qty-value px-3">${displayedQty}</span>
+                        <button type="button" class="quick-view-qty-btn px-3 border-0 bg-transparent" data-qty-action="plus" aria-label="Increase quantity">+</button>
+                    </div>
+                `;
+            }
+
+            function renderSummary() {
+                const selections = getRenderedSelections();
+                const visibleSelections = getVisibleSelections();
+                const hasOptionChoices = Boolean(currentInfo?.options?.length);
+                const totalQty = getTotalQty();
+                const grandTotal = getGrandTotal();
+                const optionRows = visibleSelections.map(function (item) {
+                    const qty = getSelectionQty(item);
+                    const lineTotal = parsePriceValue(item.price) * qty;
+                    const linePriceText = hasKnownPrice(item.price) ? formatPriceValue(lineTotal) : (item.price || 'Contact us');
+                    return `<div class="quick-view-summary-row"><span>${escapeHtml(item.label || 'Option')}</span><strong>x${qty} ${escapeHtml(linePriceText)}</strong></div>`;
+                }).join('');
+                const singleItemPrice = selections[0]?.price || 'Contact us';
+
+                renderQtyControls();
+                summaryEl.innerHTML = `
+                    <div class="quick-view-summary-title">Order Summary</div>
+                    <div class="quick-view-summary-row"><span>Item</span><span>${escapeHtml(currentInfo?.title || 'Product')}</span></div>
+                    <hr class="my-2">
+                    ${hasOptionChoices ? optionRows + '<hr class="my-2">' : `<div class="quick-view-summary-row"><span>Price</span><strong>x${totalQty} ${escapeHtml(singleItemPrice)}</strong></div>
+                    <hr class="my-2">
+                    <div class="quick-view-summary-row"><span>Total Qty</span><span>${totalQty}</span></div>`}
+                    ${hasOptionChoices ? `<div class="quick-view-summary-row"><span>Total Qty</span><span>${totalQty}</span></div>` : ''}
+                    <hr class="my-2">
+                    <div class="quick-view-summary-row"><span>Total</span><strong>${hasKnownPrice(singleItemPrice) || hasOptionChoices ? escapeHtml(formatPriceValue(grandTotal)) : 'Contact us'}</strong></div>
+                `;
+                orderBtn.setAttribute('aria-label', 'Order ' + (currentInfo?.title || 'product') + ', total qty ' + totalQty);
+            }
+
+            function getCardInfo(card) {
+                const title = card.querySelector('.card-title')?.textContent.trim() || 'Product';
+                const sku = Array.from(card.querySelectorAll('.card-text')).find(function (node) {
+                    return /sku/i.test(node.textContent);
+                })?.textContent.trim() || 'Contact us for SKU details';
+                const priceNode = Array.from(card.querySelectorAll('.card-text, .items')).find(function (node) {
+                    return /price/i.test(node.textContent) || node.classList.contains('items');
+                });
+                const img = card.querySelector('img');
+
+                return {
+                    title: title,
+                    sku: sku,
+                    priceHtml: priceNode ? priceNode.innerHTML : 'Contact us for the latest price.',
+                    options: priceNode ? extractOptions(priceNode.innerHTML) : [],
+                    imageSrc: img ? img.getAttribute('src') : '',
+                    imageAlt: img ? (img.getAttribute('alt') || title) : title
+                };
+            }
+
+            function openQuickView(card) {
+                const info = getCardInfo(card);
+                currentInfo = info;
+                currentQty = 1;
+                currentSelection = null;
+                currentSelections = [];
+                currentSelectionQuantities = {};
+                titleEl.textContent = info.title;
+                skuEl.textContent = info.sku;
+                priceEl.innerHTML = '';
+                detailsEl.innerHTML = '';
+
+                if (info.imageSrc) {
+                    imageEl.src = info.imageSrc;
+                    imageEl.alt = info.imageAlt;
+                    imageEl.classList.remove('d-none');
+                } else {
+                    imageEl.classList.add('d-none');
+                    imageEl.removeAttribute('src');
+                }
+
+                if (info.options.length) {
+                    priceEl.textContent = 'Choose one or more options';
+                    detailsEl.innerHTML = '<div class="quick-view-options">' + info.options.map(function (option, index) {
+                        return `
+                            <button type="button" class="quick-view-option ${index === 0 ? 'active' : ''}" data-option-label="${escapeHtml(option.label)}" data-option-price="${escapeHtml(option.price)}">
+                                <span class="quick-view-option-label">${escapeHtml(option.label)}</span>
+                                <span class="quick-view-option-price">${escapeHtml(option.price)}</span>
+                            </button>
+                        `;
+                    }).join('') + '</div>';
+
+                    const optionButtons = Array.from(detailsEl.querySelectorAll('.quick-view-option'));
+                    const syncSelectedOptions = function () {
+                        const activeButton = optionButtons.find(function (btn) {
+                            return btn.classList.contains('active');
+                        }) || optionButtons[0];
+
+                        if (activeButton && !activeButton.classList.contains('active')) {
+                            activeButton.classList.add('active');
+                        }
+
+                        currentSelection = activeButton ? {
+                            label: activeButton.dataset.optionLabel || 'Option',
+                            price: activeButton.dataset.optionPrice || 'Contact us'
+                        } : null;
+
+                        if (currentSelection) {
+                            const exists = currentSelections.some(function (item) {
+                                return item.label === currentSelection.label && item.price === currentSelection.price;
+                            });
+                            if (!exists) {
+                                currentSelections.push(currentSelection);
+                            }
+                            currentSelectionQuantities[getSelectionKey(currentSelection)] = currentSelectionQuantities[getSelectionKey(currentSelection)] || 1;
+                        }
+
+                        const combinedPrice = currentSelections.reduce(function (sum, item) {
+                            return sum + (parsePriceValue(item.price) * getSelectionQty(item));
+                        }, 0);
+                        priceEl.textContent = 'Price: ' + (combinedPrice ? formatPriceValue(combinedPrice) : 'Contact us');
+                        renderSummary();
+                    };
+
+                    optionButtons.forEach(function (button) {
+                        button.addEventListener('click', function () {
+                            optionButtons.forEach(function (btn) {
+                                btn.classList.remove('active');
+                            });
+                            button.classList.add('active');
+                            syncSelectedOptions();
+                        });
+                    });
+
+                    syncSelectedOptions();
+                } else if (/^price/i.test(info.priceHtml.replace(/<[^>]+>/g, '').trim())) {
+                    priceEl.innerHTML = info.priceHtml;
+                    currentSelection = {
+                        label: 'Standard',
+                        price: extractSinglePrice(info.priceHtml)
+                    };
+                    currentSelections = [currentSelection];
+                } else {
+                    priceEl.innerHTML = 'Price options';
+                    detailsEl.innerHTML = '<div class="quick-view-list">' + info.priceHtml + '</div>';
+                    currentSelection = {
+                        label: 'Standard',
+                        price: 'Contact us'
+                    };
+                    currentSelections = [currentSelection];
+                }
+
+                orderBtn.href = 'https://t.me/S90constructionsupply_1';
+                renderSummary();
+                modal.show();
+            }
+
+            qtyControlsEl.addEventListener('click', function (event) {
+                const button = event.target.closest('[data-qty-action]');
+                if (!button) return;
+
+                const action = button.dataset.qtyAction;
+                if (currentInfo?.options?.length && currentSelection) {
+                    const key = getSelectionKey(currentSelection);
+                    const baseQty = getSelectionQty(currentSelection);
+                    currentSelectionQuantities[key] = action === 'minus'
+                        ? Math.max(0, baseQty - 1)
+                        : baseQty + 1;
+                } else {
+                    currentQty = action === 'minus'
+                        ? Math.max(0, currentQty - 1)
+                        : currentQty + 1;
+                }
+
+                if (currentInfo?.options?.length) {
+                    const selections = getRenderedSelections().filter(function (item) {
+                        return getSelectionQty(item) > 0;
+                    });
+                    const combinedPrice = selections.reduce(function (sum, item) {
+                        return sum + (parsePriceValue(item.price) * getSelectionQty(item));
+                    }, 0);
+                    priceEl.textContent = 'Price: ' + (combinedPrice ? formatPriceValue(combinedPrice) : 'Contact us');
+                }
+
+                renderSummary();
+            });
+
+            orderBtn.addEventListener('click', function (event) {
+                const totalQty = getTotalQty();
+
+                if (totalQty === 0) {
+                    event.preventDefault();
+                    alert('Quantity is 0. Please add at least 1 item before ordering.');
+                    return;
+                }
+
+                event.preventDefault();
+                const telegramUrl = 'https://t.me/S90constructionsupply_1?text=' + encodeURIComponent(buildTelegramOrderText());
+                window.open(telegramUrl, '_blank', 'noopener');
+            });
+
+            cards.forEach(function (card) {
+                card.tabIndex = 0;
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-label', 'Open price and order options');
+
+                card.addEventListener('click', function (event) {
+                    if (event.target.closest('a, button')) return;
+                    openQuickView(card);
+                });
+
+                card.addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        openQuickView(card);
+                    }
+                });
+            });
+        });
+    </script>
+
     <!-- category scroll script -->
     <script>
         function scrollCards(direction) {
