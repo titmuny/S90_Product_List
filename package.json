@@ -1,5 +1,11 @@
 {
+  "scripts": {
+    "images:webp": "node scripts/convert-images-to-webp.mjs 150 82"
+  },
   "dependencies": {
     "@vercel/analytics": "^1.6.1"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
   }
 }

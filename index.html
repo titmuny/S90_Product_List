@@ -7,13 +7,31 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>S90</title>
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M0RPJXHL0D"></script>
+    <!-- Delay analytics to cut non-essential requests on quick bounces -->
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-M0RPJXHL0D');
+    (function () {
+        const GA_ID = 'G-M0RPJXHL0D';
+        let gaLoaded = false;
+
+        function loadGA() {
+            if (gaLoaded) return;
+            gaLoaded = true;
+
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+            document.head.appendChild(script);
+
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () { dataLayer.push(arguments); };
+            gtag('js', new Date());
+            gtag('config', GA_ID, { anonymize_ip: true });
+        }
+
+        ['pointerdown', 'keydown', 'scroll'].forEach(function (eventName) {
+            window.addEventListener(eventName, loadGA, { once: true, passive: true });
+        });
+    })();
     </script>
 
     <link rel="icon" href="Logo PNG.png" type="image/png">
@@ -26,7 +44,7 @@
 <!-- Begins 11/05/2025 -->
 
 <div id="topBanner">
-    <img src="Banner.jpg" style="width: 100%; height: auto;">
+    <img src="Banner.webp" style="width: 100%; height: auto;" loading="eager" fetchpriority="high" decoding="async">
 </div>
 
 <!-- Navbar --> 
@@ -217,28 +235,28 @@
     
         <div class="carousel-inner text-center">
             <div class="carousel-item active">
-                <img src="slide1.jpg" class="carousel-img d-block mx-auto" alt="Slide 1">
+                <img src="slide1.webp" class="carousel-img d-block mx-auto" alt="Slide 1" loading="eager" fetchpriority="high" decoding="async">
             </div>
             <div class="carousel-item">
-                <img src="slide2.jpg" class="carousel-img d-block mx-auto" alt="Slide 2">
+                <img src="slide2.webp" class="carousel-img d-block mx-auto" alt="Slide 2" loading="lazy" fetchpriority="low" decoding="async">
             </div>
             <div class="carousel-item">
-                <img src="slide3.jpg" class="carousel-img d-block mx-auto" alt="Slide 3">
+                <img src="slide3.webp" class="carousel-img d-block mx-auto" alt="Slide 3" loading="lazy" fetchpriority="low" decoding="async">
             </div>
             <div class="carousel-item">
-                <img src="slide4.jpg" class="carousel-img d-block mx-auto" alt="Slide 4">
+                <img src="slide4.webp" class="carousel-img d-block mx-auto" alt="Slide 4" loading="lazy" fetchpriority="low" decoding="async">
             </div>
             <div class="carousel-item">
-                <img src="slide5.jpg" class="carousel-img d-block mx-auto" alt="Slide 5">
+                <img src="slide5.webp" class="carousel-img d-block mx-auto" alt="Slide 5" loading="lazy" fetchpriority="low" decoding="async">
             </div>
             <div class="carousel-item">
-                <img src="slide6.jpg" class="carousel-img d-block mx-auto" alt="Slide 6">
+                <img src="slide6.webp" class="carousel-img d-block mx-auto" alt="Slide 6" loading="lazy" fetchpriority="low" decoding="async">
             </div>
             <div class="carousel-item">
-                <img src="slide7.jpg" class="carousel-img d-block mx-auto" alt="Slide 7">
+                <img src="slide7.webp" class="carousel-img d-block mx-auto" alt="Slide 7" loading="lazy" fetchpriority="low" decoding="async">
             </div>
             <div class="carousel-item">
-                <img src="slide8.jpg" class="carousel-img d-block mx-auto" alt="Slide 8">
+                <img src="slide8.webp" class="carousel-img d-block mx-auto" alt="Slide 8" loading="lazy" fetchpriority="low" decoding="async">
             </div>
         </div>
     
@@ -344,7 +362,7 @@
             <!-- ផ្លែតំណ-ADA -->
             <div class="col-12 first-hero-bg">
                 <div class="card h-100 d-flex flex-column box img-fluid hero-banner-card" style="border-radius: 0;">
-                    <img src="ផ្លែតំណ-ADA/s1.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្លែតំណ-ADA/s1.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -1086,7 +1104,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្លែតំណ-ADA/53.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្លែតំណ-ADA/53.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -1982,7 +2000,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្លែតំណ-ADA/117.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្លែតំណ-ADA/117.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -2262,7 +2280,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្លែតំណ-ADA/137.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្លែតំណ-ADA/137.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -2290,7 +2308,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្លែតំណ-ADA/139.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្លែតំណ-ADA/139.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -2318,7 +2336,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្លែតំណ-ADA/141.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្លែតំណ-ADA/141.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -2332,7 +2350,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្លែតំណ-ADA/142.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្លែតំណ-ADA/142.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -2570,7 +2588,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្លែតំណ-ADA/159.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្លែតំណ-ADA/159.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -2584,7 +2602,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្លែតំណ-ADA/160.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្លែតំណ-ADA/160.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -2640,7 +2658,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្លែតំណ-ADA/164.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្លែតំណ-ADA/164.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -3116,7 +3134,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្លែតំណ-ADA/198.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្លែតំណ-ADA/198.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -3144,7 +3162,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្លែតំណ-ADA/200.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្លែតំណ-ADA/200.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -3256,7 +3274,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្លែតំណ-ADA/208.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្លែតំណ-ADA/208.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -3270,7 +3288,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្លែតំណ-ADA/209.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្លែតំណ-ADA/209.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -3648,7 +3666,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្លែតំណ-ADA/236.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្លែតំណ-ADA/236.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -3676,7 +3694,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្លែតំណ-ADA/238.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្លែតំណ-ADA/238.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -5135,7 +5153,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="KEY-KEY/s2.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="KEY-KEY/s2.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -5184,7 +5202,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="KEY-KEY/4.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="KEY-KEY/4.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -5296,7 +5314,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="KEY-KEY/12.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="KEY-KEY/12.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -5310,7 +5328,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="KEY-KEY/13.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="KEY-KEY/13.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -5927,7 +5945,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="KEY-KEY/58.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="KEY-KEY/58.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -6053,7 +6071,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="KEY-KEY/67.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="KEY-KEY/67.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -6067,7 +6085,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="KEY-KEY/68.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="KEY-KEY/68.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -6417,7 +6435,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="KEY-KEY/93.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="KEY-KEY/93.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -6585,7 +6603,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="KEY-KEY/108.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="KEY-KEY/108.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -6627,7 +6645,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="KEY-KEY/111.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="KEY-KEY/111.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -6977,7 +6995,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="KEY-KEY/136.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="KEY-KEY/136.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -7089,7 +7107,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="KEY-KEY/144.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="KEY-KEY/144.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -7103,7 +7121,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="KEY-KEY/145.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="KEY-KEY/145.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -7650,7 +7668,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="KEY-KEY/185.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="KEY-KEY/185.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -8686,7 +8704,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="Laser Distance Meter-LSDT/s3.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Laser Distance Meter-LSDT/s3.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -9058,7 +9076,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="Laser Distance Meter-LSDT/31-32.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Laser Distance Meter-LSDT/31-32.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -9092,7 +9110,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="Motor-DLMT/s4.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Motor-DLMT/s4.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -9303,7 +9321,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="Motor-DLMT/20.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Motor-DLMT/20.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -9317,7 +9335,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="Motor-DLMT/21-22.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Motor-DLMT/21-22.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -9450,7 +9468,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="Motor-DLMT/32.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Motor-DLMT/32.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -9759,7 +9777,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="Motor-DLMT/59.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Motor-DLMT/59.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -10672,7 +10690,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="Motor-DLMT/136.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Motor-DLMT/136.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -10913,7 +10931,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="Motor-DLMT/153.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Motor-DLMT/153.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -11018,7 +11036,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="Motor-DLMT/160.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Motor-DLMT/160.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -11048,7 +11066,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="Motor-DLMT/162.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Motor-DLMT/162.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -11093,7 +11111,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="Motor-DLMT/165.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Motor-DLMT/165.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -11231,7 +11249,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="Motor-DLMT/174.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Motor-DLMT/174.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -11495,7 +11513,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="Solar-Solar/s5.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Solar-Solar/s5.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -11650,7 +11668,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="Survay-SVY/s6.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Survay-SVY/s6.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -11804,7 +11822,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="Survay-SVY/17.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Survay-SVY/17.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -11846,7 +11864,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="Survay-SVY/20-22.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Survay-SVY/20-22.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -11930,7 +11948,7 @@
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="Survay-SVY/95.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Survay-SVY/95.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -11947,7 +11965,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="wall&roof-WR/s7.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="wall&roof-WR/s7.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -11975,7 +11993,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="Welding Magnet Support-WDMN/s8.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Welding Magnet Support-WDMN/s8.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -12067,7 +12085,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="Welding Magnet Support-WDMN/13.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="Welding Magnet Support-WDMN/13.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -12376,7 +12394,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="ក្តារ-KDAR/s9.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ក្តារ-KDAR/s9.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -12490,7 +12508,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="គ្រឿងការ៉ូ-TLSC/s10.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងការ៉ូ-TLSC/s10.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -12968,7 +12986,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងការ៉ូ-TLSC/65-70.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងការ៉ូ-TLSC/65-70.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -13041,7 +13059,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងការ៉ូ-TLSC/79-80.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងការ៉ូ-TLSC/79-80.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -14006,7 +14024,7 @@
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងការ៉ូ-TLSC/234-235.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងការ៉ូ-TLSC/234-235.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -14023,7 +14041,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងការ៉ូ-TLSC/236.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងការ៉ូ-TLSC/236.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -14298,7 +14316,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="គ្រឿងជ័រ-PLAS/s11.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងជ័រ-PLAS/s11.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -14413,7 +14431,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="គ្រឿងឈើ-WDST/s12.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងឈើ-WDST/s12.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -14672,7 +14690,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងឈើ-WDST/42-44.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងឈើ-WDST/42-44.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -15688,7 +15706,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងឈើ-WDST/207-210.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងឈើ-WDST/207-210.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -15931,7 +15949,7 @@
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងឈើ-WDST/247-250.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងឈើ-WDST/247-250.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -15951,7 +15969,7 @@
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងឈើ-WDST/251.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងឈើ-WDST/251.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -15993,7 +16011,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងឈើ-WDST/254N.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងឈើ-WDST/254N.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -16240,7 +16258,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងឈើ-WDST/298-308.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងឈើ-WDST/298-308.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -16599,7 +16617,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងឈើ-WDST/350.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងឈើ-WDST/350.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -16776,7 +16794,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងឈើ-WDST/368.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងឈើ-WDST/368.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -16857,14 +16875,14 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/s13.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/s13.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/1.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/1.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -16879,7 +16897,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/2.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/2.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -16909,7 +16927,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/4.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/4.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -16939,7 +16957,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/6-8.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/6-8.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -17127,7 +17145,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/21.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/21.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -17144,7 +17162,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/22-23.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/22-23.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -17180,7 +17198,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/28-29.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/28-29.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -17214,7 +17232,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/32.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/32.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -17229,7 +17247,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/33-35.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/33-35.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -17247,7 +17265,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/36.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/36.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -17454,7 +17472,7 @@
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/240.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/240.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -17566,7 +17584,7 @@
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/235.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/235.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -17739,7 +17757,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/79.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/79.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -18178,7 +18196,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/122-124.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/122-124.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -18545,7 +18563,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/157.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/157.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -18628,7 +18646,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/168-170.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/168-170.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -18725,7 +18743,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/179.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/179.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -18754,7 +18772,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/181.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/181.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -18884,7 +18902,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងទឹក-WSP/198.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងទឹក-WSP/198.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -18936,7 +18954,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="គ្រឿងបន្លាស់-TMOR/s14.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងបន្លាស់-TMOR/s14.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -19135,7 +19153,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/s15.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/s15.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -19172,7 +19190,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/3-4.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/3-4.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -19189,7 +19207,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/5.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/5.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -19275,7 +19293,7 @@
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/18.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/18.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -19320,7 +19338,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/639.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/639.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -19333,7 +19351,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/638.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/638.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -19387,7 +19405,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/30-35.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/30-35.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -19438,7 +19456,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/38-39.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/38-39.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -19621,7 +19639,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/60-64.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/60-64.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -19658,7 +19676,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/67-74.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/67-74.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -19695,7 +19713,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/76-77.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/76-77.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -19730,7 +19748,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/81-83.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/81-83.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -19766,7 +19784,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/87-89.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/87-89.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -21533,7 +21551,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/485-486.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/485-486.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -21671,7 +21689,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/500-503.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/500-503.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -22164,7 +22182,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/593-597.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/593-597.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -22434,7 +22452,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងភ្លើង-ELT/631.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងភ្លើង-ELT/631.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -22453,14 +22471,14 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="គ្រឿងសំអាត-CLEAN/s16.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងសំអាត-CLEAN/s16.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងសំអាត-CLEAN/1.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងសំអាត-CLEAN/1.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -22475,7 +22493,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងសំអាត-CLEAN/2.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងសំអាត-CLEAN/2.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -22490,7 +22508,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="គ្រឿងសំអាត-CLEAN/3.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="គ្រឿងសំអាត-CLEAN/3.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -22508,7 +22526,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="ឆុត-SET/s17.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ឆុត-SET/s17.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -22710,7 +22728,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="ជើងទ្រ រឹត-STSP/s18.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ជើងទ្រ រឹត-STSP/s18.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -23047,7 +23065,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ជើងទ្រ រឹត-STSP/45-48.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ជើងទ្រ រឹត-STSP/45-48.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -23071,7 +23089,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ជើងទ្រ រឹត-STSP/49-50.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ជើងទ្រ រឹត-STSP/49-50.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -23424,7 +23442,7 @@
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ជើងទ្រ រឹត-STSP/95.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ជើងទ្រ រឹត-STSP/95.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -23441,14 +23459,14 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="ដែក-Iron/s19.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ដែក-Iron/s19.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ដែក-Iron/1-6.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ដែក-Iron/1-6.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -23557,7 +23575,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="ដែក-MTSP/s20.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ដែក-MTSP/s20.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -23971,7 +23989,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ដែក-MTSP/48-49.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ដែក-MTSP/48-49.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -24424,7 +24442,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ដែក-MTSP/119.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ដែក-MTSP/119.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -24638,7 +24656,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="ថ្នាំ-PAN/s21.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ថ្នាំ-PAN/s21.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -25201,7 +25219,7 @@
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ថ្នាំ-PAN/72-79.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ថ្នាំ-PAN/72-79.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -25243,7 +25261,7 @@
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ថ្នាំ-PAN/82.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ថ្នាំ-PAN/82.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -25342,7 +25360,7 @@
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ថ្នាំ-PAN/92-93.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ថ្នាំ-PAN/92-93.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -25525,7 +25543,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="ថ្ម បេតុង-CCSP/s22.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ថ្ម បេតុង-CCSP/s22.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -25652,7 +25670,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ថ្ម បេតុង-CCSP/31.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ថ្ម បេតុង-CCSP/31.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -25748,7 +25766,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="ទុយោ-TUBE/s23.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ទុយោ-TUBE/s23.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -26270,7 +26288,7 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ទុយោ-TUBE/149-150.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ទុយោ-TUBE/149-150.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -27573,7 +27591,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="ទុយោរទឹកស្អាត-HDPE/s24.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ទុយោរទឹកស្អាត-HDPE/s24.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -27774,7 +27792,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="បន្ទាត់-RLSP/s25.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="បន្ទាត់-RLSP/s25.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -28526,7 +28544,7 @@
              
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="បន្ទាត់-RLSP/99.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="បន្ទាត់-RLSP/99.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -28543,7 +28561,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="ផ្សេងៗ-OTH/s26.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្សេងៗ-OTH/s26.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -29002,7 +29020,7 @@
             
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្សេងៗ-OTH/64.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្សេងៗ-OTH/64.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -29229,7 +29247,7 @@
             
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្សេងៗ-OTH/97-100.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្សេងៗ-OTH/97-100.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -30428,7 +30446,7 @@
             
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្សេងៗ-OTH/296-297.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្សេងៗ-OTH/296-297.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -30557,7 +30575,7 @@
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្សេងៗ-OTH/309-310.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្សេងៗ-OTH/309-310.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -30709,7 +30727,7 @@
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ផ្សេងៗ-OTH/326-327.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ផ្សេងៗ-OTH/326-327.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -30972,7 +30990,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="វីស-វីស/s27.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="វីស-វីស/s27.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -31779,7 +31797,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="ស្កុត&កាវ-SCOT/s28.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ស្កុត&កាវ-SCOT/s28.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -32142,7 +32160,7 @@
             
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="ស្កុត&កាវ-SCOT/80.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="ស្កុត&កាវ-SCOT/80.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -32311,7 +32329,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="អគ្គីភ័យ-fire/s29.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="អគ្គីភ័យ-fire/s29.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -32356,7 +32374,7 @@
 
             <div class="col-12">
                 <div class="card h-100 d-flex flex-column box hero-banner-card" style="border-radius: 0;">
-                    <img src="អំពូល-LIGHT/s30.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="អំពូល-LIGHT/s30.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                     style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                 </div>
             </div>
@@ -32484,7 +32502,7 @@
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 d-flex flex-column box" style="border-radius: 0;">
-                    <img src="អំពូល-LIGHT/18-24.jpg" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
+                    <img src="អំពូល-LIGHT/18-24.webp" class="card-img-top" loading="lazy" decoding="async" fetchpriority="low" alt="..."
                         style="border-radius: 0; max-height: fit-content; margin: 0 auto;">
                     <div class="card-body d-flex flex-column">
                         <div>
@@ -32710,7 +32728,7 @@
         let lastScrollTop = 0;
         const goToTopBtn = document.getElementById("goToTopBtn");
 
-        // Initialize opacity and transitions
+        // Initialize opacity and transition
         goToTopBtn.style.opacity = 0;
         goToTopBtn.style.transition = "opacity 0.4s";
 
@@ -33087,8 +33105,6 @@
         document.addEventListener('shown.bs.collapse', updateLayout);
         document.addEventListener('hidden.bs.collapse', updateLayout);
     </script>
-
-    <script defer src="/_vercel/insights/script.js"></script>
 
 </body>
 </html>
