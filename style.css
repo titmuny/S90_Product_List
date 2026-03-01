@@ -346,6 +346,32 @@
 }
 
 @media (max-width: 767.98px) {
+  .card.box:not(.hero-banner-card) {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .card.box:not(.hero-banner-card):hover,
+  .card.box:not(.hero-banner-card):focus-visible {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .card.box:not(.hero-banner-card)::after,
+  .card.box:not(.hero-banner-card):hover::after,
+  .card.box:not(.hero-banner-card):focus-visible::after {
+    opacity: 0 !important;
+    transform: none !important;
+  }
+
+  .modal-dialog.modal-lg {
+    margin: 0.5rem;
+  }
+
+  .modal-content {
+    border-radius: 18px;
+  }
+
   .quick-view-image-wrap {
     min-height: 300px;
   }
@@ -401,6 +427,23 @@
   .quick-view-summary {
     padding: 0.75rem 0.8rem;
     border-radius: 12px;
+  }
+
+  .modal-footer {
+    gap: 0.75rem;
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .modal-footer .btn,
+  .quick-view-order-btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .quick-view-order-btn {
+    min-height: 48px;
+    font-size: 1rem;
   }
 }
 img {

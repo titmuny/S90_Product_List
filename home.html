@@ -33552,6 +33552,37 @@
                 return lines.join('\n');
             }
 
+            function isMobileDevice() {
+                return window.matchMedia('(max-width: 767.98px)').matches
+                    || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+            }
+
+            function getTelegramShareUrls() {
+                const text = encodeURIComponent(buildTelegramOrderText());
+                return {
+                    app: 'tg://resolve?domain=S90constructionsupply_1&text=' + text,
+                    web: 'https://t.me/S90constructionsupply_1?text=' + text
+                };
+            }
+
+            function openTelegramOrder() {
+                const telegramUrls = getTelegramShareUrls();
+
+                if (isMobileDevice()) {
+                    const fallbackTimer = window.setTimeout(function () {
+                        window.location.href = telegramUrls.web;
+                    }, 900);
+
+                    window.location.href = telegramUrls.app;
+                    window.setTimeout(function () {
+                        window.clearTimeout(fallbackTimer);
+                    }, 1200);
+                    return;
+                }
+
+                window.open(telegramUrls.web, '_blank', 'noopener');
+            }
+
             function getSelectionKey(item) {
                 return [item?.label || 'Option', item?.price || 'Contact us'].join('||');
             }
@@ -33763,8 +33794,7 @@
                 }
 
                 event.preventDefault();
-                const telegramUrl = 'https://t.me/S90constructionsupply_1?text=' + encodeURIComponent(buildTelegramOrderText());
-                window.open(telegramUrl, '_blank', 'noopener');
+                openTelegramOrder();
             });
 
             cards.forEach(function (card) {
