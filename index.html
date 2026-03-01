@@ -33272,13 +33272,33 @@
                 }
             }
 
+            function normalizeSkuText(value) {
+                const text = (value || '').trim();
+                if (!text) return 'Contact us for SKU details';
+
+                const matches = Array.from(text.matchAll(/sku\s*:\s*([^\s|,;]+)/gi));
+                if (matches.length) {
+                    return 'SKU: ' + matches[0][1].trim();
+                }
+
+                return text;
+            }
+
             function buildTelegramOrderText() {
                 const selections = getVisibleSelections();
-                const lines = [
+                const lines = [];
+                const imageUrl = getImageShareUrl();
+
+                if (imageUrl) {
+                    lines.push(imageUrl);
+                    lines.push('');
+                }
+
+                lines.push(
                     'Order Summary',
                     'Product: ' + (currentInfo?.title || 'Product'),
-                    'SKU: ' + (currentInfo?.sku || 'N/A')
-                ];
+                    (currentInfo?.sku || 'SKU: N/A')
+                );
 
                 if (currentInfo?.options?.length) {
                     lines.push('Items:');
@@ -33294,11 +33314,6 @@
 
                 lines.push('Total Qty: ' + getTotalQty());
                 lines.push('Grand Total: ' + formatPriceValue(getGrandTotal()));
-
-                const imageUrl = getImageShareUrl();
-                if (imageUrl) {
-                    lines.push('Product Image: ' + imageUrl);
-                }
 
                 return lines.join('\n');
             }
@@ -33390,9 +33405,9 @@
 
             function getCardInfo(card) {
                 const title = card.querySelector('.card-title')?.textContent.trim() || 'Product';
-                const sku = Array.from(card.querySelectorAll('.card-text')).find(function (node) {
+                const skuText = Array.from(card.querySelectorAll('.card-text')).find(function (node) {
                     return /sku/i.test(node.textContent);
-                })?.textContent.trim() || 'Contact us for SKU details';
+                })?.textContent || '';
                 const priceNode = Array.from(card.querySelectorAll('.card-text, .items')).find(function (node) {
                     return /price/i.test(node.textContent) || node.classList.contains('items');
                 });
@@ -33400,7 +33415,7 @@
 
                 return {
                     title: title,
-                    sku: sku,
+                    sku: normalizeSkuText(skuText),
                     priceHtml: priceNode ? priceNode.innerHTML : 'Contact us for the latest price.',
                     options: priceNode ? extractOptions(priceNode.innerHTML) : [],
                     imageSrc: img ? img.getAttribute('src') : '',
@@ -33540,7 +33555,7 @@
 
                 if (totalQty === 0) {
                     event.preventDefault();
-                    alert('Quantity is 0. Please add at least 1 item before ordering.');
+                    alert('Please add at least 1 item before ordering.');
                     return;
                 }
 
