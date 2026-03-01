@@ -219,7 +219,7 @@
     <div class="position-relative">
 
         <!-- LEFT BUTTON -->
-        <button class="scroll-btn left" onclick="scrollCards(-1)">
+        <button id="homeCategoryPrevBtn" class="scroll-btn left" onclick="scrollCards(-1)">
             <i class="bi bi-chevron-left"></i>
         </button>
 
@@ -626,7 +626,7 @@
         </div>
 
         <!-- RIGHT BUTTON -->
-        <button class="scroll-btn right" onclick="scrollCards(1)">
+        <button id="homeCategoryNextBtn" class="scroll-btn right" onclick="scrollCards(1)">
             <i class="bi bi-chevron-right"></i>
         </button>
 
@@ -32997,6 +32997,7 @@
                 margin: 0 auto;
             }
         }
+
     </style>
 
     <!-- goToBottomBtn -->
@@ -33120,7 +33121,15 @@
 
         function filterCards(query) {
             const cards = document.querySelectorAll('.card');
+            const homeScrollButtons = [
+                document.getElementById('homeCategoryPrevBtn'),
+                document.getElementById('homeCategoryNextBtn')
+            ];
             let found = false;
+
+            homeScrollButtons.forEach(btn => {
+                if (btn) btn.style.display = query !== '' ? 'none' : '';
+            });
 
             cards.forEach(card => {
                 const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
