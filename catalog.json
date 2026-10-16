@@ -1,17 +1,6 @@
 {
   "version": 1,
-  "products": [
-    {
-      "sku": "12345678910",
-      "name": "Test",
-      "category": "Motor-DLMT",
-      "price": "1.00",
-      "image": "uploads/products/123456789-mvadbmm2.jpg",
-      "visible": true,
-      "createdAt": "2026-10-16T02:48:21.820Z",
-      "updatedAt": "2026-10-16T02:55:06.645Z"
-    }
-  ],
+  "products": [],
   "overrides": {},
-  "updatedAt": "2026-10-16T02:55:06.645Z"
+  "updatedAt": "2026-10-16T03:06:02.347Z"
 }
