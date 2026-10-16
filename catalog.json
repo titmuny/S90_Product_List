@@ -1,6 +1,11 @@
 {
   "version": 1,
   "products": [],
-  "overrides": {},
-  "updatedAt": "2026-10-16T03:06:02.347Z"
+  "overrides": {
+    "9999": {
+      "hidden": true,
+      "updatedAt": "2026-10-16T03:29:01.211Z"
+    }
+  },
+  "updatedAt": "2026-10-16T03:29:01.211Z"
 }
