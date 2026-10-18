@@ -393,7 +393,6 @@ if (document.body.dataset.page === 'index') {
                             <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content border-0 shadow-lg">
                                     <div class="modal-header">
-                                        <h5 class="modal-title quick-view-title mb-0" id="quickViewTitle">Product details</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body p-0">
@@ -402,6 +401,7 @@ if (document.body.dataset.page === 'index') {
                                                 <img id="quickViewImage" class="img-fluid quick-view-image" src="" alt="">
                                             </div>
                                             <div class="col-md-7 p-4">
+                                                <h5 class="modal-title quick-view-title mb-3" id="quickViewTitle">Product details</h5>
                                                 <p id="quickViewSku" class="quick-view-sku text-dark mb-2"></p>
                                                 <div id="quickViewPrice" class="fw-bold quick-view-price mb-3"></div>
                                                 <div id="quickViewDetails" class="quick-view-details text-dark"></div>
@@ -420,7 +420,7 @@ if (document.body.dataset.page === 'index') {
                                             <i class="bi bi-cart3"></i>
                                             <span>Order Now</span>
                                         </a>
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x"></i></button>
+                                        <button type="button" class="btn quick-view-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -1232,7 +1232,6 @@ if (document.body.dataset.page === 'home') {
                             <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content border-0 shadow-lg">
                                     <div class="modal-header">
-                                        <h5 class="modal-title quick-view-title mb-0" id="quickViewTitle">Product details</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body p-0">
@@ -1241,6 +1240,7 @@ if (document.body.dataset.page === 'home') {
                                                 <img id="quickViewImage" class="img-fluid quick-view-image" src="" alt="">
                                             </div>
                                             <div class="col-md-7 p-4">
+                                                <h5 class="modal-title quick-view-title mb-3" id="quickViewTitle">Product details</h5>
                                                 <p id="quickViewSku" class="quick-view-sku text-dark mb-2"></p>
                                                 <div id="quickViewPrice" class="fw-bold quick-view-price mb-3"></div>
                                                 <div id="quickViewDetails" class="quick-view-details text-dark"></div>
@@ -1259,7 +1259,7 @@ if (document.body.dataset.page === 'home') {
                                             <i class="bi bi-cart3"></i>
                                             <span>Order Now</span>
                                         </a>
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn quick-view-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
                             </div>
