@@ -754,14 +754,15 @@ body {
 @media (max-width: 991.98px) {
   .s90-sidebar-panel { --bs-offcanvas-width: 100vw; width: 100vw; max-width: 100vw; }
 }
-.s90-sidebar-title { color: black !important; font-family: poppins; }
+.s90-sidebar-title { display: flex; align-items: center; gap: 7px; margin: 0; color: black !important; font-family: poppins; line-height: 1.2; }
+.s90-sidebar-title > i { display: block; flex: 0 0 auto; line-height: 1; }
 .s90-square-card { border-radius: 0; }
 .s90-telegram-floating-button { position: fixed; bottom: 80px; right: 20px; z-index: 99; background: linear-gradient(135deg, #35b6ef 0%, #229ed9 100%); color: white; border-radius: 50%; width: 50px; height: 50px; font-size: 29px; line-height: 1; display: flex; align-items: center; justify-content: center; text-decoration: none; margin-bottom: 70px; }
 .s90-telegram-floating-button-lower { position: fixed; bottom: 80px; right: 20px; z-index: 99; background: linear-gradient(135deg, #35b6ef 0%, #229ed9 100%); color: white; border-radius: 50%; width: 50px; height: 50px; font-size: 29px; line-height: 1; display: flex; align-items: center; justify-content: center; text-decoration: none; margin-bottom: 7px; }
 .s90-text-center { text-align: center; }
 
 /* Compact Samsung-style mobile navbar */
-.s90-mobile-header { position: relative; min-height: 44px; justify-content: space-between; padding: 0 4px; }
+.s90-mobile-header { position: relative; height: 44px; min-height: 44px; justify-content: space-between; padding: 0 4px; }
 .s90-mobile-wordmark { display: inline-flex; flex: 0 0 auto; align-items: center; text-decoration: none; }
 .s90-mobile-logo { display: block; width: 74px; height: 34px; object-fit: contain; }
 .s90-mobile-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; margin-right: 20px; }
@@ -771,13 +772,22 @@ body {
 .s90-mobile-icon:focus-visible, .s90-mobile-search-submit:focus-visible { outline: 2px solid #1769aa; outline-offset: 2px; }
 .s90-mobile-cart { position: relative; }
 .s90-mobile-cart .s90-cart-badge { top: 0; right: -8px; min-width: 15px; height: 15px; padding: 0 3px; font: 700 10px/15px Arial,sans-serif; }
-.s90-mobile-search-panel { position: absolute; top: calc(100% + 5px); left: 0; right: 0; z-index: 1080; display: flex; gap: 8px; padding: 10px; border: 1px solid #ddd; border-radius: 6px; background: #fff; box-shadow: 0 5px 16px rgba(0,0,0,.16); }
+.s90-mobile-search-panel { position: absolute; top: -8px; left: -14px; right: -14px; z-index: 1081; display: flex; align-items: center; gap: 8px; height: calc(100% + 16px); min-height: 0; padding: 5px 28px 5px 24px; border: 0; border-radius: 0; background: #fff; box-shadow: none; }
 .s90-mobile-search-panel[hidden] { display: none; }
-.s90-mobile-search-panel .form-control { min-width: 0; border: 1px solid #ced4da !important; border-radius: 4px !important; }
-.s90-mobile-search-submit { width: 42px; flex: 0 0 42px; border: 0; border-radius: 4px; background: #f4f4f4; color: #222; font-size: 18px; }
+.s90-main-navbar:has(.s90-mobile-search-panel:not([hidden])) { padding-top: 0 !important; padding-bottom: 0 !important; }
+.s90-main-navbar:has(.s90-mobile-search-panel:not([hidden])) > .s90-navbar-content { padding-top: 0 !important; padding-bottom: 0 !important; }
+.s90-mobile-header:has(.s90-mobile-search-panel:not([hidden])) > .s90-mobile-wordmark,
+.s90-mobile-header:has(.s90-mobile-search-panel:not([hidden])) > .s90-mobile-actions { visibility: hidden; }
+.s90-mobile-search-panel .form-control { min-width: 0; height: 40px; padding: 0 0 2px; border: 0 !important; border-bottom: 1px solid #e4e4e4 !important; border-radius: 0 !important; outline: 0; box-shadow: none !important; color: #333; font: 16px Arial,sans-serif; }
+.s90-mobile-search-panel .form-control:focus { border-bottom-color: #cfcfcf !important; }
+.s90-mobile-search-panel .form-control::placeholder { color: #777; opacity: 1; }
+.s90-mobile-search-panel .form-control::-webkit-search-cancel-button { display: none; }
+.s90-mobile-search-submit { display: inline-flex; width: 24px; height: 34px; flex: 0 0 24px; align-items: center; justify-content: center; padding: 0; border: 0; background: transparent; color: #444; }
+.s90-mobile-search-submit svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
 .s90-mobile-nav-panel { --bs-offcanvas-width: 100vw; width: 100vw; max-width: 100vw; background-color: #fff; color: #222; }
 .s90-mobile-nav-panel .offcanvas-header { min-height: 48px; padding: 10px 16px; border-color: #e8e8e8 !important; }
-.s90-mobile-nav-panel .offcanvas-title { color: #333; font: 500 1rem/1.4 Arial, sans-serif; letter-spacing: 0; }
+.s90-mobile-nav-panel .offcanvas-title { display: flex; align-items: center; gap: 7px; margin: 0; color: #333; font-family: poppins; font-size: 1.25rem; font-weight: 600; line-height: 1.2; letter-spacing: 0; }
+.s90-mobile-nav-panel .offcanvas-title > i { display: block; flex: 0 0 auto; line-height: 1; }
 .s90-mobile-nav-panel .offcanvas-body { max-height: none; padding: 8px 16px; }
 .s90-mobile-nav-links .nav-link { padding: 10px 2px; border-bottom: 1px solid #ececec; border-radius: 0; color: #333; font: 400 .9rem/1.5 Arial, sans-serif; text-decoration: none; }
 .s90-mobile-nav-links .nav-link:hover, .s90-mobile-nav-links .nav-link:focus { color: #222; background: #f7f9fc; }

@@ -1831,6 +1831,11 @@ document.querySelectorAll('[data-s90-search-toggle]').forEach((button) => {
         panel.hidden = true;
         button.setAttribute('aria-expanded', 'false');
     });
+    panel.querySelector('[data-s90-search-close]')?.addEventListener('click', () => {
+        panel.hidden = true;
+        button.setAttribute('aria-expanded', 'false');
+        button.focus();
+    });
 });
 
 document.querySelectorAll('[data-s90-open-categories]').forEach((button) => {

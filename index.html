@@ -53,8 +53,8 @@
                 <button class="s90-mobile-icon" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNavMenu" aria-controls="mobileNavMenu" aria-label="Open menu"><svg class="s90-nav-svg s90-nav-menu-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg></button>
             </div>
             <form class="s90-mobile-search-panel" id="mobileSearchPanel" role="search" hidden>
-                <input class="form-control" type="search" placeholder="Search products" aria-label="Search products" id="navbarSearchMobile">
-                <button class="s90-mobile-search-submit" type="submit" aria-label="Submit search"><i class="bi bi-search"></i></button>
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search products" id="navbarSearchMobile">
+                <button class="s90-mobile-search-submit" type="button" data-s90-search-close aria-label="Close search"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button>
             </form>
         </div>
 
@@ -97,7 +97,7 @@
 <!-- Mobile navigation menu -->
 <div class="offcanvas offcanvas-end s90-mobile-nav-panel" tabindex="-1" id="mobileNavMenu" aria-labelledby="mobileNavLabel">
     <div class="offcanvas-header border-bottom text-white fw-semibold s90-mobile-nav-header">
-        <h5 class="offcanvas-title fw-bold" id="mobileNavLabel">  <i class="bi bi-list-ul"></i> Menu</h5>
+        <h5 class="offcanvas-title fw-bold" id="mobileNavLabel"><i class="bi bi-list-ul" aria-hidden="true"></i><span>Menu</span></h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close menu"></button>
     </div>
     <div class="offcanvas-body">
@@ -112,8 +112,7 @@
     <!-- Sidebar Offcanvas Menu -->
     <div class="offcanvas offcanvas-start s90-sidebar-panel" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarLabel">
         <div class="offcanvas-header border-bottom border-light">
-            <h5 class="offcanvas-title text-white fw-semibold s90-sidebar-title" id="sidebarLabel">  <i class="bi bi-list-ul"></i>
-                Categories</h5>
+            <h5 class="offcanvas-title text-white fw-semibold s90-sidebar-title" id="sidebarLabel"><i class="bi bi-list-ul" aria-hidden="true"></i><span>Categories</span></h5>
             <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas"
                 aria-label="Close"></button>
         </div>
