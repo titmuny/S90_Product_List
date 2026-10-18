@@ -732,6 +732,9 @@ body {
 .s90-main-navbar { background-color: #00c3ff; transition: background-color 0.3s ease; }
 .s90-navbar-content { font-family: Arial, 'Khmer OS Battambang'; font-size: 1.1rem; }
 .s90-navbar-content-moul { font-family: Arial, 'Moul'; font-size: 1.1rem; }
+.s90-welcome-header { padding-top: 1rem; padding-bottom: 1rem; }
+.s90-welcome-header h1 { margin-bottom: .5rem; font-size: clamp(2rem, 3.2vw, 3rem); }
+.s90-welcome-header p { margin-bottom: 0; font-size: 1.1rem; }
 .s90-navbar-logo { height: 60px; }
 .s90-page-body { scroll-behavior: smooth; font-family: Poppins, 'Khmer OS Battambang'; }
 .s90-page-footer { background: linear-gradient(135deg, #0f172a, #1e293b); font-family: 'Inter', sans-serif; }
@@ -753,7 +756,7 @@ body {
 .s90-mobile-header { position: relative; min-height: 44px; justify-content: space-between; padding: 0 4px; }
 .s90-mobile-wordmark { display: inline-flex; flex: 0 0 auto; align-items: center; text-decoration: none; }
 .s90-mobile-logo { display: block; width: 74px; height: 34px; object-fit: contain; }
-.s90-mobile-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+.s90-mobile-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; margin-right: 8px; }
 .s90-mobile-icon { display: inline-flex; width: 28px; height: 34px; align-items: center; justify-content: center; padding: 0; border: 0; background: transparent; color: #262626; line-height: 1; text-decoration: none; cursor: pointer; }
 .s90-nav-svg { display: block; width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.65; stroke-linecap: round; stroke-linejoin: round; }
 .s90-nav-menu-svg { width: 22px; height: 22px; stroke-width: 1.7; }
