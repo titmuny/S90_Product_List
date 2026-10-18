@@ -772,9 +772,9 @@ body {
 .s90-mobile-icon:focus-visible, .s90-mobile-search-submit:focus-visible { outline: 2px solid #1769aa; outline-offset: 2px; }
 .s90-mobile-cart { position: relative; }
 .s90-mobile-cart .s90-cart-badge { top: 0; right: -8px; min-width: 15px; height: 15px; padding: 0 3px; font: 700 10px/15px Arial,sans-serif; }
-.s90-mobile-search-panel { position: absolute; top: -8px; left: -14px; right: -14px; z-index: 1081; display: flex; align-items: center; gap: 8px; height: calc(100% + 16px); min-height: 0; padding: 5px 28px 5px 24px; border: 0; border-radius: 0; background: #fff; box-shadow: none; }
+.s90-mobile-search-panel { position: fixed; top: 0; left: 0; right: 0; z-index: 1081; display: flex; align-items: center; gap: 8px; height: 52px; min-height: 0; padding: 5px 28px 5px 24px; border: 0; border-radius: 0; background: #fff; box-shadow: none; }
 .s90-mobile-search-panel[hidden] { display: none; }
-.s90-main-navbar:has(.s90-mobile-search-panel:not([hidden])) { padding-top: 0 !important; padding-bottom: 0 !important; }
+.s90-main-navbar:has(.s90-mobile-search-panel:not([hidden])) { background: #fff !important; padding-top: 0 !important; padding-bottom: 0 !important; }
 .s90-main-navbar:has(.s90-mobile-search-panel:not([hidden])) > .s90-navbar-content { padding-top: 0 !important; padding-bottom: 0 !important; }
 .s90-mobile-header:has(.s90-mobile-search-panel:not([hidden])) > .s90-mobile-wordmark,
 .s90-mobile-header:has(.s90-mobile-search-panel:not([hidden])) > .s90-mobile-actions { visibility: hidden; }
