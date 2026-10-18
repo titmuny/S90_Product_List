@@ -772,7 +772,7 @@ body {
 .s90-mobile-icon:focus-visible, .s90-mobile-search-submit:focus-visible { outline: 2px solid #1769aa; outline-offset: 2px; }
 .s90-mobile-cart { position: relative; }
 .s90-mobile-cart .s90-cart-badge { top: 0; right: -8px; min-width: 15px; height: 15px; padding: 0 3px; font: 700 10px/15px Arial,sans-serif; }
-.s90-mobile-search-panel { position: absolute; top: 0; left: 0; right: 0; z-index: 2; display: flex; align-items: center; gap: 8px; box-sizing: border-box; height: 44px; min-height: 0; padding: 0 max(24px, calc((100vw - 560px) / 2)); border: 0; border-radius: 0; background: #fff; box-shadow: inset 0 3px 5px -4px rgba(0,0,0,.45); }
+.s90-mobile-search-panel { position: fixed; top: 0; left: 0; right: 0; z-index: 1081; display: flex; align-items: center; gap: 8px; box-sizing: border-box; height: 44px; min-height: 0; padding: 0 max(24px, calc((100vw - 560px) / 2)); border: 0; border-radius: 0; background: #fff; box-shadow: inset 0 3px 5px -4px rgba(0,0,0,.45); }
 .s90-mobile-search-panel[hidden] { display: none; }
 .s90-main-navbar:has(.s90-mobile-search-panel:not([hidden])) { background: #fff !important; }
 .s90-main-navbar:has(.s90-mobile-search-panel:not([hidden])) > .s90-navbar-content { padding-top: 0 !important; padding-bottom: 0 !important; }
