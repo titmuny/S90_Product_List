@@ -25,6 +25,28 @@
     var n = Number(v);
     return isFinite(n) ? '$' + n.toFixed(2) : String(v);
   }
+  // "5" / "$5" -> "$5.00"; anything else (e.g. "$1x.xx") is shown exactly as typed
+  function itemPrice(v) {
+    var t = String(v == null ? '' : v).trim().replace(/^=\s*/, '');
+    if (/^\$?\d+(\.\d+)?$/.test(t)) return '$' + Number(t.replace('$', '')).toFixed(2);
+    return t;
+  }
+  function buildList(items) {
+    var ul = document.createElement('ul');
+    ul.className = 'items';
+    items.forEach(function (it) {
+      var li = document.createElement('li');
+      li.appendChild(document.createTextNode(it.name + (it.price ? ' ' : '')));
+      if (it.price) {
+        var b = document.createElement('b');
+        b.className = 'multi-price';
+        b.textContent = '= ' + itemPrice(it.price);
+        li.appendChild(b);
+      }
+      ul.appendChild(li);
+    });
+    return ul;
+  }
   function wrapperOf(card) {
     return card.closest('[class*="col-"]') || card.parentElement || card;
   }
@@ -51,6 +73,16 @@
       if (o.price != null && o.price !== '') {
         var p = card.querySelector('.s90-product-price');
         if (p) p.textContent = 'Price: ' + money(o.price);
+      }
+      if (Array.isArray(o.items) && o.items.length) {
+        var list = buildList(o.items);
+        var oldUl = card.querySelector('ul.items');
+        var oldPrice = card.querySelector('.s90-product-price');
+        if (oldUl) oldUl.parentNode.replaceChild(list, oldUl);
+        else if (oldPrice) oldPrice.parentNode.replaceChild(list, oldPrice);
+        else { var holder = card.querySelector('.card-body > div') || card.querySelector('.card-body'); if (holder) holder.appendChild(list); }
+        var extraPrice = card.querySelector('.s90-product-price'); // old single price no longer shown
+        if (extraPrice && extraPrice.parentNode) extraPrice.parentNode.removeChild(extraPrice);
       }
       if (o.image) { var im = card.querySelector('img'); if (im) { im.setAttribute('src', o.image); im.removeAttribute('srcset'); } }
       if (o.category) card.setAttribute('data-category', o.category);
@@ -89,7 +121,8 @@
     top.appendChild(el('h5', 'card-title txt-card', prod.name));
     top.appendChild(el('p', 'card-text', 'SKU: ' + prod.sku));
     body.appendChild(top);
-    body.appendChild(el('p', 'card-text fw-bold s90-product-price', 'Price: ' + money(prod.price)));
+    if (Array.isArray(prod.items) && prod.items.length) top.appendChild(buildList(prod.items));
+    else body.appendChild(el('p', 'card-text fw-bold s90-product-price', 'Price: ' + money(prod.price)));
     card.appendChild(img);
     card.appendChild(body);
     col.appendChild(card);

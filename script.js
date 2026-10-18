@@ -857,6 +857,23 @@ if (document.body.dataset.page === 'index') {
                 openTelegramOrder();
             });
 
+            // S90-ADMIN: cart hook (lets cart.js read what is selected in the quick view window)
+            window.S90QuickView = {
+                getOrder: function () {
+                    if (!currentInfo) return null;
+                    var multi = currentInfo.options && currentInfo.options.length;
+                    var lines = multi
+                        ? getVisibleSelections().map(function (it) { return { label: it.label || 'Option', price: it.price || 'Contact us', qty: getSelectionQty(it) }; })
+                        : (currentSelection ? [{ label: '', price: currentSelection.price || 'Contact us', qty: currentQty }] : []);
+                    return {
+                        title: currentInfo.title,
+                        sku: String(currentInfo.sku || '').replace(/^SKU:\s*/i, ''),
+                        imageRel: currentInfo.imageSrc || '',
+                        lines: lines.filter(function (l) { return l.qty > 0; })
+                    };
+                }
+            };
+
             cards.forEach(function (card) {
                 card.tabIndex = 0;
                 card.setAttribute('role', 'button');
@@ -1800,6 +1817,37 @@ if (document.body.dataset.page === 'home') {
 }
 
 /* navbar page: analytics, navigation, product interactions, and responsive behavior. */
+document.querySelectorAll('[data-s90-search-toggle]').forEach((button) => {
+    const panel = document.getElementById(button.getAttribute('aria-controls'));
+    const input = panel?.querySelector('input[type="search"]');
+    if (!panel) return;
+    button.addEventListener('click', () => {
+        const willOpen = panel.hidden;
+        panel.hidden = !willOpen;
+        button.setAttribute('aria-expanded', String(willOpen));
+        if (willOpen) input?.focus();
+    });
+    panel.addEventListener('submit', () => {
+        panel.hidden = true;
+        button.setAttribute('aria-expanded', 'false');
+    });
+});
+
+document.querySelectorAll('[data-s90-open-categories]').forEach((button) => {
+    button.addEventListener('click', () => {
+        const menu = document.getElementById('mobileNavMenu');
+        const categories = document.getElementById('sidebarMenu');
+        if (!categories || !window.bootstrap?.Offcanvas) return;
+        const openCategories = () => window.bootstrap.Offcanvas.getOrCreateInstance(categories).show();
+        if (menu && menu.classList.contains('show')) {
+            menu.addEventListener('hidden.bs.offcanvas', openCategories, { once: true });
+            window.bootstrap.Offcanvas.getOrCreateInstance(menu).hide();
+        } else {
+            openCategories();
+        }
+    });
+});
+
 if (document.body.dataset.page === 'navbar' || (!document.body.dataset.page && document.querySelector('.navbar'))) {
     (() => {
         (() => {

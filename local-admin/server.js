@@ -78,14 +78,29 @@ function parseSite() {
     }
     const parts = html.split(/<div class="card h-100 d-flex flex-column box s90-square-card"/);
     for (let i = 1; i < parts.length; i++) {
-      const blk = parts[i].slice(0, 3500);
+      const blk = parts[i].slice(0, 30000);
       const sku = /SKU:\s*([^\s<|,;]+)/i.exec(blk);
       if (!sku) continue;
       const img = /<img[^>]*\ssrc="([^"]+)"/i.exec(blk);
       const title = /<h5[^>]*class="card-title[^"]*"[^>]*>([\s\S]*?)<\/h5>/i.exec(blk);
       const price = /Price:\s*([\s\S]*?)<\/p>/i.exec(blk);
       const src = img ? decodeEntities(img[1]) : '';
+      const items = [];
+      const ul = /<ul[^>]*class="[^"]*\bitems\b[^"]*"[^>]*>([\s\S]*?)<\/ul>/i.exec(blk);
+      if (ul) {
+        const liRe = /<li[^>]*>([\s\S]*?)<\/li>/gi;
+        let lm;
+        while ((lm = liRe.exec(ul[1]))) {
+          const pm = /<b[^>]*class="[^"]*multi-price[^"]*"[^>]*>([\s\S]*?)<\/b>/i.exec(lm[1]);
+          const strip = (t) => decodeEntities(t.replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim();
+          items.push({
+            name: strip(lm[1].replace(/<b[^>]*class="[^"]*multi-price[^"]*"[^>]*>[\s\S]*?<\/b>/i, '')),
+            price: pm ? strip(pm[1]).replace(/^=\s*/, '') : ''
+          });
+        }
+      }
       products.push({
+        items,
         sku: sku[1], page: file,
         name: title ? decodeEntities(title[1].replace(/<[^>]+>/g, '')).trim() : '',
         price: price ? decodeEntities(price[1].replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim() : '',
@@ -149,6 +164,20 @@ function cleanPrice(v) {
   if (!/^\d{1,7}(\.\d{1,2})?$/.test(s)) throw new HttpError(400, 'Price must be a number such as 5 or 5.50.');
   return Number(s).toFixed(2);
 }
+function cleanItems(v) {
+  if (v == null) return [];
+  if (!Array.isArray(v)) throw new HttpError(400, 'Sub-items must be a list.');
+  if (v.length > 80) throw new HttpError(400, 'Too many sub-items (max 80).');
+  const out = [];
+  for (const it of v) {
+    const name = cleanText(it && it.name, 200).replace(/[<>]/g, '');
+    const price = cleanText(it && it.price, 30).replace(/[<>]/g, '');
+    if (!name && !price) continue;            // ignore fully empty rows
+    if (!name) throw new HttpError(400, 'Every sub-item needs a name.');
+    out.push({ name, price });
+  }
+  return out;
+}
 function validCategory(value) {
   const ok = getSite().categories.some((c) => c.value === value);
   if (!ok) throw new HttpError(400, 'Unknown category. Pick one from the list.');
@@ -211,7 +240,7 @@ async function gitStatus() {
   const branch = await git(['rev-parse', '--abbrev-ref', 'HEAD'], 15000);
   return { ok: true, remote: remote.out.replace(/\/\/[^@/]+@/, '//***@'), branch: branch.out };
 }
-const PUBLISH_PATHS = ['catalog.json', 'uploads', 'public-catalog.js', 'script.js', 'index.html', 'home.html',
+const PUBLISH_PATHS = ['catalog.json', 'uploads', 'public-catalog.js', 'cart.js', 'script.js', 'index.html', 'home.html',
   'style.css', 'vercel.json', '.vercelignore', '.gitignore', 'start-local-admin.bat', 'local-admin'];
 let publishing = false;
 async function publish() {
@@ -297,12 +326,15 @@ const api = {
     const name = cleanText(b.name, 200);
     if (!name) throw new HttpError(400, 'Product name is required.');
     const category = validCategory(cleanText(b.category, 120));
-    const price = cleanPrice(b.price);
+    const items = cleanItems(b.items);
+    const hasPrice = String(b.price == null ? '' : b.price).trim() !== '';
+    if (!items.length && !hasPrice) throw new HttpError(400, 'Enter a price, or add at least one sub-item.');
+    const price = hasPrice ? cleanPrice(b.price) : '';
     const prev = idx >= 0 ? catalog.products[idx] : null;
     let image = prev ? prev.image : '';
     if (b.imageData) { image = saveImageFromDataUrl(b.imageData, sku); }
     else if (!image) throw new HttpError(400, 'Please upload a product picture.');
-    const rec = { sku, name, category, price, image, visible: b.visible !== false,
+    const rec = { sku, name, category, price, items, image, visible: b.visible !== false,
       createdAt: prev ? prev.createdAt : nowIso(), updatedAt: nowIso() };
     if (idx >= 0) catalog.products[idx] = rec; else catalog.products.push(rec);
     saveCatalog(catalog);
@@ -343,6 +375,7 @@ const api = {
     if ('name' in b) { const n = cleanText(b.name, 200); if (n) o.name = n; else delete o.name; }
     if ('price' in b) { if (String(b.price).trim() === '') delete o.price; else o.price = cleanPrice(b.price); }
     if ('category' in b) { if (!b.category) delete o.category; else o.category = validCategory(cleanText(b.category, 120)); }
+    if ('items' in b) { const it = cleanItems(b.items); if (it.length) o.items = it; else delete o.items; }
     if (b.imageData) o.image = saveImageFromDataUrl(b.imageData, sku);
     if (!o.hidden) delete o.hidden;
     o.updatedAt = nowIso();

@@ -570,6 +570,11 @@ body {
     top: 56px; /* matches Bootstrap mobile navbar */
     height: 56px;
   }
+  .category-bar .scroll-btn,
+  #homeCategoryPrevBtn,
+  #homeCategoryNextBtn {
+    display: none !important;
+  }
 }
 
 /* Optional: remove extra space if container-fluid adds padding */
@@ -743,6 +748,30 @@ body {
 .s90-telegram-floating-button { position: fixed; bottom: 80px; right: 20px; z-index: 99; background: linear-gradient(135deg, #35b6ef 0%, #229ed9 100%); color: white; border-radius: 50%; width: 50px; height: 50px; font-size: 29px; line-height: 1; display: flex; align-items: center; justify-content: center; text-decoration: none; margin-bottom: 70px; }
 .s90-telegram-floating-button-lower { position: fixed; bottom: 80px; right: 20px; z-index: 99; background: linear-gradient(135deg, #35b6ef 0%, #229ed9 100%); color: white; border-radius: 50%; width: 50px; height: 50px; font-size: 29px; line-height: 1; display: flex; align-items: center; justify-content: center; text-decoration: none; margin-bottom: 7px; }
 .s90-text-center { text-align: center; }
+
+/* Compact Samsung-style mobile navbar */
+.s90-mobile-header { position: relative; min-height: 44px; justify-content: space-between; padding: 0 4px; }
+.s90-mobile-wordmark { display: inline-flex; flex: 0 0 auto; align-items: center; text-decoration: none; }
+.s90-mobile-logo { display: block; width: 74px; height: 34px; object-fit: contain; }
+.s90-mobile-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+.s90-mobile-icon { display: inline-flex; width: 28px; height: 34px; align-items: center; justify-content: center; padding: 0; border: 0; background: transparent; color: #262626; line-height: 1; text-decoration: none; cursor: pointer; }
+.s90-nav-svg { display: block; width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.65; stroke-linecap: round; stroke-linejoin: round; }
+.s90-nav-menu-svg { width: 22px; height: 22px; stroke-width: 1.7; }
+.s90-mobile-icon:focus-visible, .s90-mobile-search-submit:focus-visible { outline: 2px solid #1769aa; outline-offset: 2px; }
+.s90-mobile-cart { position: relative; }
+.s90-mobile-cart .s90-cart-badge { top: 0; right: -8px; min-width: 15px; height: 15px; padding: 0 3px; font: 700 10px/15px Arial,sans-serif; }
+.s90-mobile-search-panel { position: absolute; top: calc(100% + 5px); left: 0; right: 0; z-index: 1080; display: flex; gap: 8px; padding: 10px; border: 1px solid #ddd; border-radius: 6px; background: #fff; box-shadow: 0 5px 16px rgba(0,0,0,.16); }
+.s90-mobile-search-panel[hidden] { display: none; }
+.s90-mobile-search-panel .form-control { min-width: 0; border: 1px solid #ced4da !important; border-radius: 4px !important; }
+.s90-mobile-search-submit { width: 42px; flex: 0 0 42px; border: 0; border-radius: 4px; background: #f4f4f4; color: #222; font-size: 18px; }
+.s90-mobile-nav-panel { width: min(320px, 85vw); }
+.s90-mobile-nav-links .nav-link { padding: 13px 8px; border-bottom: 1px solid #ececec; color: #222; font-size: 1rem; text-decoration: none; }
+.s90-mobile-nav-links .nav-link:hover, .s90-mobile-nav-links .nav-link:focus { color: #0d6efd; background: #f7f9fc; }
+@media (max-width: 991.98px) {
+  .s90-main-navbar { background: #00c3ff; }
+  .s90-mobile-header { font-family: Arial, sans-serif; }
+  .s90-main-navbar .container-fluid { padding-right: 14px; padding-left: 14px; }
+}
 
 /* Responsive carousel sizing */
 #carouselExampleIndicators {
