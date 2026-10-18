@@ -11,15 +11,14 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm s90-main-navbar">
     <div class="container-fluid s90-navbar-content">
-        <div class="d-flex d-lg-none align-items-center w-100 gap-2 px-2">
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
-                aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <form class="d-flex flex-grow-1 align-items-center" role="search">
-                <input class="form-control border-0 rounded-pill me-2 px-3 py-2" type="search" placeholder="Search products"
-                    aria-label="Search" id="navbarSearchMobile">
-                <button class="btn btn-warning rounded-pill px-3 py-2 fw-semibold shadow-sm" type="submit"><i class="bi bi-search"></i></button>
+        <div class="s90-mobile-header d-flex d-lg-none align-items-center w-100">
+            <div class="s90-mobile-actions">
+                <button class="s90-mobile-icon" type="button" data-s90-search-toggle aria-label="Search products" aria-expanded="false" aria-controls="mobileSearchPanel"><i class="bi bi-search"></i></button>
+                <button class="s90-mobile-icon" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-label="Open menu"><i class="bi bi-list"></i></button>
+            </div>
+            <form class="s90-mobile-search-panel" id="mobileSearchPanel" role="search" hidden>
+                <input class="form-control" type="search" placeholder="Search products" aria-label="Search products" id="navbarSearchMobile">
+                <button class="s90-mobile-search-submit" type="submit" aria-label="Submit search"><i class="bi bi-search"></i></button>
             </form>
         </div>
         <a class="navbar-brand d-none d-lg-block" href="#"><img src="Blue.png" alt="S90 Logo" class="s90-navbar-logo"></a>

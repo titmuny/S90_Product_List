@@ -9,6 +9,7 @@
 | `local-admin/local-admin.html` | The dashboard page |
 | `local-admin/patch-site.js` | Adds the catalog loader to `index.html`, `home.html`, `script.js` (once, with backups) |
 | `public-catalog.js` | Public-site loader: applies `catalog.json` to the live website |
+| `cart.js` | Shopping cart for visitors: Add to Cart button, floating cart button, send whole order to Telegram |
 | `catalog.json` | Product data (starts empty) |
 | `uploads/products/` | Uploaded product pictures |
 | `.vercelignore` | Keeps the admin tool off the public website |
@@ -26,9 +27,9 @@
    Keep that window open. The password is created once and only shown on first run.
 5. Open the link, sign in.
 
-On first start the dashboard automatically makes three small edits (backups are kept in `local-admin/backups/`):
-- `index.html` and `home.html`: one extra `<script>` line for `public-catalog.js`
-- `script.js`: two lines so categories read `data-category` for dashboard products
+On first start the dashboard automatically makes small edits (backups are kept in `local-admin/backups/`):
+- `index.html` and `home.html`: extra `<script>` lines for `public-catalog.js` and `cart.js`
+- `script.js`: a few lines so categories read `data-category` for dashboard products, and a small hook so the cart can read what is selected in the product window
 
 ## Part 2 — Add, edit, hide, delete
 
@@ -42,7 +43,26 @@ On first start the dashboard automatically makes three small edits (backups are 
 - These are saved as SKU-based overrides in `catalog.json`. Your original HTML is never edited.
 - An override applies to every card with that SKU (for example a product that appears in both New Arrivals and its own category).
 
+**Sub-items** (products that list several sizes/types, each with its own price — about 630 of your products):
+- In the Add/Edit form there is a **Sub-items** section: one row per item (name + price).
+- **Add** with “+ Add sub-item”, **update** by typing in a row, **delete** with ✕, **reorder** with ↑ ↓.
+- Existing products load their current sub-items into the form, so you only change what you need.
+- Price can be a number (`5` shows as `$5.00`) or text such as `$1x.xx`, shown exactly as typed.
+- When a product has sub-items, they replace its single price on the website. A single-price product can be turned into a list by adding rows.
+- To go back to the original list of an existing product, delete every row and save (or use Reset).
+- For a product you create, leave the single price empty if you use sub-items.
+
 Pictures: JPG, PNG, WEBP or GIF, under 10 MB. Compress large photos first.
+
+## Shopping cart (for your customers)
+
+- In a product's window there are now two buttons: **Order Now** (orders just that product, as before) and **Add to Cart**.
+- Add to Cart saves the selected options and quantities, closes the window and shows a short message. The same product/option added again just increases its quantity.
+- A round orange **cart button** sits above the Facebook button on every page. The number on it is the total quantity.
+- Tap it to see the order details: change quantities (+ / −), remove items, see the total, **Clear** the cart, or press **Order Now** to send everything in one Telegram message to @S90constructionsupply_1.
+- The cart is remembered in the customer's browser (also after refresh and between the Home and main pages) until they clear it. The cart is not cleared automatically after Order Now, because the site can't know whether the message was actually sent.
+- Prices written as text such as `$1x.xx` are not added to the total; the cart shows a note that those prices will be confirmed.
+- Very long orders (over about 3,500 characters) are copied to the clipboard and the customer is asked to paste them into Telegram.
 
 ## Part 3 — Publish
 
