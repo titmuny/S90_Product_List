@@ -20,6 +20,11 @@
   if (!catalog) return;
   var overrides = catalog.overrides || {};
   var products = Array.isArray(catalog.products) ? catalog.products : [];
+  var showPrices = !(catalog.settings && catalog.settings.showPrices === false);
+
+  function telegramContactUrl() {
+    return 'https://t.me/S90constructionsupply_1';
+  }
 
   function money(v) {
     var n = Number(v);
@@ -47,6 +52,39 @@
     });
     return ul;
   }
+  function applyPriceVisibility(card, override) {
+    var visible = override && typeof override.showPrice === 'boolean' ? override.showPrice : showPrices;
+    var prices = card.querySelectorAll('.s90-product-price, .multi-price');
+    for (var i = 0; i < prices.length; i++) {
+      var price = prices[i];
+      if (price.classList.contains('multi-price')) {
+        if (visible) {
+          if (price.tagName === 'A' && price.dataset.s90OriginalText) {
+            var amount = document.createElement('b');
+            amount.className = 'multi-price';
+            amount.textContent = price.dataset.s90OriginalText;
+            price.parentNode.replaceChild(amount, price);
+          } else price.style.display = '';
+        } else if (price.tagName !== 'A') {
+          var link = document.createElement('a');
+          link.className = 'multi-price s90-contact-price';
+          link.href = telegramContactUrl();
+          link.target = '_blank';
+          link.rel = 'noopener';
+          link.textContent = 'Contact Us';
+          link.dataset.s90OriginalText = price.textContent;
+          price.parentNode.replaceChild(link, price);
+        }
+      } else if (!visible) {
+        if (!price.dataset.s90OriginalText) price.dataset.s90OriginalText = price.textContent;
+        price.innerHTML = 'Price: <a class="s90-contact-price" href="' + telegramContactUrl() + '" target="_blank" rel="noopener">Contact Us</a>';
+        price.style.display = '';
+      } else {
+        if (price.dataset.s90OriginalText) price.textContent = price.dataset.s90OriginalText;
+        price.style.display = '';
+      }
+    }
+  }
   function wrapperOf(card) {
     return card.closest('[class*="col-"]') || card.parentElement || card;
   }
@@ -67,7 +105,7 @@
       var card = all[i];
       var sku = skuOf(card);
       var o = sku && Object.prototype.hasOwnProperty.call(overrides, sku) ? overrides[sku] : null;
-      if (!o) continue;
+      if (!o) { applyPriceVisibility(card, null); continue; }
       if (o.hidden) { var w = wrapperOf(card); if (w && w.parentNode) w.parentNode.removeChild(w); continue; }
       if (o.name) { var t = card.querySelector('.card-title'); if (t) t.textContent = o.name; }
       if (o.price != null && o.price !== '') {
@@ -86,6 +124,7 @@
       }
       if (o.image) { var im = card.querySelector('img'); if (im) { im.setAttribute('src', o.image); im.removeAttribute('srcset'); } }
       if (o.category) card.setAttribute('data-category', o.category);
+      applyPriceVisibility(card, o);
     }
   }
 
@@ -122,10 +161,11 @@
     top.appendChild(el('p', 'card-text', 'SKU: ' + prod.sku));
     body.appendChild(top);
     if (Array.isArray(prod.items) && prod.items.length) top.appendChild(buildList(prod.items));
-    else body.appendChild(el('p', 'card-text fw-bold s90-product-price', 'Price: ' + money(prod.price)));
+    else { var price = el('p', 'card-text fw-bold s90-product-price', 'Price: ' + money(prod.price)); body.appendChild(price); }
     card.appendChild(img);
     card.appendChild(body);
     col.appendChild(card);
+    applyPriceVisibility(card, null);
     container.appendChild(col);
   });
 })();

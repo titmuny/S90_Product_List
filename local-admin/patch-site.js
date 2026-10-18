@@ -19,6 +19,11 @@ function patchHtml(root, name, notes) {
   const file = path.join(root, name);
   if (!fs.existsSync(file)) return;
   const original = fs.readFileSync(file, 'utf8');
+  // home.html now forwards to index.html so both entry points share one homepage.
+  if (name === 'home.html' && /window\.location\.replace\(['"]index\.html/.test(original)) {
+    notes.push('Skipped home.html (it redirects to index.html).');
+    return;
+  }
   let html = original;
   const re = /<script src="script\.js(?:\?[^"]*)?"([^>]*)>\s*<\/script>/;
   if (!re.test(html)) throw new Error(name + ': could not find <script src="script.js" defer>.');
