@@ -215,8 +215,8 @@ function cleanEd(){return edItems.map(function(x){return {name:(x.name||'').trim
 function openProductForm(p){
   var edit=!!p;p=p||{sku:'',name:'',category:'',price:'',image:'',visible:true};edItems=(p.items||[]).map(function(x){return {name:x.name,price:x.price}});
   $('modalBody').innerHTML='<h3 style="margin-top:0">'+(edit?'Edit product':'Add product')+'</h3><div id="fMsg"></div>'
-  +'<div class="grid"><div><label>SKU (unique)</label><input type="text" id="fSku" value="'+esc(p.sku)+'"></div><div><label>Price (USD) — leave empty if you use sub-items</label><input type="text" id="fPrice" inputmode="decimal" value="'+esc(p.price)+'" placeholder="5.00"></div></div>'
   +'<label>Product name</label><input type="text" id="fName" value="'+esc(p.name)+'">'
+  +'<div class="grid"><div><label>SKU (unique)</label><input type="text" id="fSku" value="'+esc(p.sku)+'"></div><div><label>Price (USD) — leave empty if you use sub-items</label><input type="text" id="fPrice" inputmode="decimal" value="'+esc(p.price)+'" placeholder="5.00"></div></div>'
   +'<label>Category</label><select id="fCat">'+catOptions(p.category,false)+'</select>'
   +'<label>Sub-items (optional — each with its own price; when present they replace the single price on the website)</label>'+itemsEditorHtml()
   +'<label>Picture (JPG, PNG, WEBP, GIF — under 10 MB)</label><div class="row"><img id="fPrev" class="preview" '+(p.image?'src="'+esc(imgUrl(p.image))+'"':'style="visibility:hidden"')+' alt=""><input type="file" id="fFile" accept="image/jpeg,image/png,image/webp,image/gif"></div>'

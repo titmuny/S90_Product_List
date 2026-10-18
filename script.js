@@ -178,8 +178,11 @@ if (document.body.dataset.page === 'index') {
 
     (() => {
         const scrollContainer = document.getElementById('categoryButtons');
-        const btnLeft = document.querySelector('.scroll-btn.left');
-        const btnRight = document.querySelector('.scroll-btn.right');
+        if (!scrollContainer) return;
+
+        const categoryBar = scrollContainer.closest('.category-bar');
+        const btnLeft = categoryBar?.querySelector('.scroll-btn.left');
+        const btnRight = categoryBar?.querySelector('.scroll-btn.right');
 
         // Click buttons scroll
         btnLeft?.addEventListener('click', () => {
@@ -224,7 +227,7 @@ if (document.body.dataset.page === 'index') {
         document.addEventListener('DOMContentLoaded', function () {
 
             const buttons = document.querySelectorAll('.category-filter');
-            const cards = Array.from(document.querySelectorAll('.card'));
+            const cards = Array.from(document.querySelectorAll('.card')).filter(card => !card.closest('.no-filter'));
 
             if (!buttons.length || !cards.length) return;
 
@@ -281,8 +284,12 @@ if (document.body.dataset.page === 'index') {
 
                     const cardCategory = getCategoryFromCard(card);
                     const normalizedCardCategory = normalize(cardCategory);
+                    const imageSource = normalize(card.querySelector('img')?.getAttribute('src') || '');
+                    const isSpecialCategory = normalizedCategory === 'new arrivals' || normalizedCategory === 'best sellers';
 
-                    if (normalizedCardCategory === normalizedCategory) {
+                    if (isSpecialCategory
+                        ? imageSource.startsWith(normalizedCategory === 'new arrivals' ? 'new arrivals/' : 'best sellers/')
+                        : normalizedCardCategory === normalizedCategory) {
                         wrapper.style.display = '';
                     } else {
                         wrapper.style.display = 'none';
@@ -347,7 +354,7 @@ if (document.body.dataset.page === 'index') {
 
                 if (!currentCategory) return;
 
-                const normalizedCurrent = normalize(currentCategory);
+                    const normalizedCurrent = normalize(currentCategory);
 
                 buttons.forEach(btn => {
 
@@ -921,6 +928,94 @@ if (document.body.dataset.page === 'index') {
     document.querySelectorAll('form[role="search"]').forEach((form) => form.addEventListener('submit', window.handleSearch));
 }
 
+/* Home category filtering follows the same behavior as the index page. */
+if (document.body.dataset.page === 'home') {
+    (() => {
+        document.addEventListener('DOMContentLoaded', function () {
+            const buttons = document.querySelectorAll('.category-filter');
+            const cards = Array.from(document.querySelectorAll('.card')).filter(card => !card.closest('.no-filter'));
+            if (!buttons.length || !cards.length) return;
+
+            function findWrapper(card) {
+                return card.closest('[class*="col-"]') || card.parentElement || card;
+            }
+
+            function normalize(str) {
+                return (str || '').toString().normalize('NFKC').replace(/\s+/g, ' ').trim().toLowerCase();
+            }
+
+            function getCategoryFromCard(card) {
+                if (card.dataset && card.dataset.category) return card.dataset.category.trim();
+                const img = card.querySelector('img');
+                if (!img) return null;
+                const parts = (img.getAttribute('src') || '').split('/');
+                return parts.length > 1 ? parts[0].trim() : null;
+            }
+
+            function filterByCategory(category) {
+                const normalizedCategory = normalize(category);
+                cards.forEach(card => {
+                    const wrapper = findWrapper(card);
+                    if (!wrapper) return;
+                    if (normalizedCategory === 'all') {
+                        wrapper.style.display = '';
+                        return;
+                    }
+
+                    const normalizedCardCategory = normalize(getCategoryFromCard(card));
+                    const imageSource = normalize(card.querySelector('img')?.getAttribute('src') || '');
+                    const special = normalizedCategory === 'new arrivals' || normalizedCategory === 'best sellers';
+                    const matches = special
+                        ? imageSource.startsWith(normalizedCategory + '/')
+                        : normalizedCardCategory === normalizedCategory;
+                    wrapper.style.display = matches ? '' : 'none';
+                });
+
+                buttons.forEach(btn => {
+                    const active = normalize(btn.getAttribute('data-category')) === normalizedCategory;
+                    btn.classList.toggle('active', active);
+                    if (active) btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                });
+
+                try {
+                    const off = document.getElementById('sidebarMenu');
+                    if (off && window.bootstrap?.Offcanvas) window.bootstrap.Offcanvas.getInstance(off)?.hide();
+                } catch (err) { }
+            }
+
+            buttons.forEach(btn => btn.addEventListener('click', e => {
+                e.preventDefault();
+                filterByCategory(btn.getAttribute('data-category'));
+            }));
+
+            window.addEventListener('scroll', function () {
+                let currentCategory = null;
+                for (const card of cards) {
+                    const wrapper = findWrapper(card);
+                    if (!wrapper || wrapper.style.display === 'none') continue;
+                    const rect = wrapper.getBoundingClientRect();
+                    if (rect.top >= 0 && rect.top <= window.innerHeight * 0.35) {
+                        currentCategory = getCategoryFromCard(card);
+                        break;
+                    }
+                }
+                if (!currentCategory) return;
+
+                const current = normalize(currentCategory);
+                buttons.forEach(btn => {
+                    const active = normalize(btn.getAttribute('data-category')) === current;
+                    if (active && !btn.classList.contains('active')) {
+                        btn.classList.add('active');
+                        btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                    } else if (!active) {
+                        btn.classList.remove('active');
+                    }
+                });
+            });
+        });
+    })();
+}
+
 /* home page: analytics, navigation, product interactions, and responsive behavior. */
 if (document.body.dataset.page === 'home') {
     (() => {
@@ -1097,8 +1192,11 @@ if (document.body.dataset.page === 'home') {
 
     (() => {
         const scrollContainer = document.getElementById('categoryButtons');
-        const btnLeft = document.querySelector('.scroll-btn.left');
-        const btnRight = document.querySelector('.scroll-btn.right');
+        if (!scrollContainer) return;
+
+        const categoryBar = scrollContainer.closest('.category-bar');
+        const btnLeft = categoryBar?.querySelector('.scroll-btn.left');
+        const btnRight = categoryBar?.querySelector('.scroll-btn.right');
 
         // Click buttons scroll
         btnLeft?.addEventListener('click', () => {
@@ -1136,82 +1234,6 @@ if (document.body.dataset.page === 'home') {
             const x = e.pageX - scrollContainer.getBoundingClientRect().left;
             const walk = (x - startX) * 1.5;
             scrollContainer.scrollLeft = scrollLeft - walk;
-        });
-    })();
-
-    (() => {
-        document.addEventListener('DOMContentLoaded', () => {
-            const buttons = document.querySelectorAll('.category-filter');
-
-            // ❗ Only cards NOT inside .no-filter
-            const cardElements = Array.from(
-                document.querySelectorAll('.card')
-            ).filter(card => !card.closest('.no-filter'));
-
-            if (!buttons.length) {
-                console.warn('No .category-filter buttons found.');
-                return;
-            }
-
-            function findWrapper(card) {
-                return card.closest('[class*="col-"]') || card.parentElement || card;
-            }
-
-            // 🔒 Hide only filterable cards on load
-            cardElements.forEach(card => {
-                const wrapper = findWrapper(card);
-                if (wrapper) wrapper.style.display = 'none';
-            });
-
-            function normalize(str) {
-                return (str || '')
-                    .toString()
-                    .normalize('NFKC')
-                    .replace(/\s+/g, ' ')
-                    .trim()
-                    .toLowerCase();
-            }
-
-            function onClickHandler(e) {
-                e.preventDefault();
-                const btn = e.currentTarget;
-                const category = (btn.dataset.category || '').trim();
-
-                buttons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const nCat = normalize(category);
-
-                cardElements.forEach(card => {
-                    const wrapper = findWrapper(card);
-                    if (!wrapper) return;
-
-                    const cardCategory = card.dataset.category || '';
-                    let matched = false;
-
-                    if (category === 'All' || category === '') {
-                        matched = true;
-                    } else if (cardCategory) {
-                        matched = normalize(cardCategory).includes(nCat);
-                    } else {
-                        const img = card.querySelector('img');
-                        const src = img ? img.getAttribute('src') : '';
-                        matched = normalize(src).includes(nCat);
-                    }
-
-                    wrapper.style.display = matched ? '' : 'none';
-                });
-
-                // Close offcanvas (mobile)
-                try {
-                    const off = document.getElementById('sidebarMenu');
-                    if (off && window.bootstrap?.Offcanvas) {
-                        bootstrap.Offcanvas.getInstance(off)?.hide();
-                    }
-                } catch { }
-            }
-
-            buttons.forEach(btn => btn.addEventListener('click', onClickHandler));
         });
     })();
 
@@ -1733,15 +1755,7 @@ if (document.body.dataset.page === 'home') {
     (() => {
         const wrapper = document.getElementById("categoryScroll");
         const row = document.getElementById("scrollRow");
-
-        /* ===== INFINITE LOOP ===== */
-        const originals = [...row.children];
-        originals.forEach(c => row.appendChild(c.cloneNode(true)));
-        originals.forEach(c => row.insertBefore(c.cloneNode(true), row.firstChild));
-
-        setTimeout(() => {
-            wrapper.scrollLeft = row.scrollWidth / 3;
-        }, 50);
+        if (!wrapper || !row) return;
 
         /* ===== SCROLL AMOUNT ===== */
         function cardsPerScroll() {
@@ -1755,13 +1769,6 @@ if (document.body.dataset.page === 'home') {
                 behavior: "smooth"
             });
         }
-
-        /* ===== LOOP FIX ===== */
-        wrapper.addEventListener("scroll", () => {
-            const section = row.scrollWidth / 3;
-            if (wrapper.scrollLeft < section * .5) wrapper.scrollLeft += section;
-            if (wrapper.scrollLeft > section * 1.5) wrapper.scrollLeft -= section;
-        });
 
         /* ===== TOUCH SWIPE ===== */
         let isDown = false, startX = 0, startScroll = 0;
