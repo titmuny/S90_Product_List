@@ -108,9 +108,10 @@
 
   function injectStyle() {
     var css = [
-      '.s90-cart-fab{position:fixed;right:20px;bottom:290px;z-index:99;width:50px;height:50px;border:none;border-radius:50%;',
+      '.s90-cart-fab{position:fixed;right:20px;bottom:210px;z-index:99;width:50px;height:50px;padding:4px!important;border:none;border-radius:50%;box-sizing:border-box;',
       'background:linear-gradient(135deg,#ff9f1a,#f57c00);color:#fff;font-size:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3)}',
-      '@media(max-width:992px){.s90-cart-fab{right:12px;bottom:176px;width:40px;height:40px;font-size:20px}}',
+      '.s90-cart-fab>i{font-size:24px!important;line-height:1}',
+      '@media(max-width:767px){.s90-cart-fab{right:12px;bottom:176px;width:40px;height:40px;padding:2px!important;font-size:20px}.s90-cart-fab>i{font-size:20px!important}}',
       '.s90-cart-fab.bump{animation:s90bump .5s}@keyframes s90bump{30%{transform:scale(1.25)}60%{transform:scale(.92)}}',
       '.s90-cart-badge{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:#d32f2f;color:#fff;font:700 12px/20px Arial,sans-serif;text-align:center}',
       '.s90-cart-overlay{position:fixed;inset:0;z-index:1070;background:rgba(0,0,0,.5);display:flex;justify-content:flex-end}',
