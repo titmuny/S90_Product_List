@@ -1,23 +1,6 @@
 {
   "version": 1,
-  "products": [
-    {
-      "sku": "iron00024asd",
-      "name": "test តេស",
-      "category": "ដែក-Iron",
-      "price": "1.00",
-      "items": [
-        {
-          "name": "s",
-          "price": "1"
-        }
-      ],
-      "image": "uploads/products/ada01121aa-mvkg8b29.jpg",
-      "visible": true,
-      "createdAt": "2026-10-23T04:07:27.490Z",
-      "updatedAt": "2026-10-23T04:23:44.040Z"
-    }
-  ],
+  "products": [],
   "overrides": {
     "9999": {
       "hidden": true,
@@ -32,5 +15,5 @@
       "updatedAt": "2026-10-23T04:39:23.293Z"
     }
   },
-  "updatedAt": "2026-10-23T04:39:23.293Z"
+  "updatedAt": "2026-10-23T04:41:22.501Z"
 }
