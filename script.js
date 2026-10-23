@@ -224,7 +224,7 @@ if (document.body.dataset.page === 'index') {
         document.addEventListener('DOMContentLoaded', function () {
 
             const buttons = document.querySelectorAll('.category-filter');
-            const cards = Array.from(document.querySelectorAll('.card'));
+            const cards = Array.from(document.querySelectorAll('.card')).filter(card => !card.closest('.no-filter'));
 
             if (!buttons.length || !cards.length) return;
 
@@ -281,8 +281,12 @@ if (document.body.dataset.page === 'index') {
 
                     const cardCategory = getCategoryFromCard(card);
                     const normalizedCardCategory = normalize(cardCategory);
+                    const imageSource = normalize(card.querySelector('img')?.getAttribute('src') || '');
+                    const isSpecialCategory = normalizedCategory === 'new arrivals' || normalizedCategory === 'best sellers';
 
-                    if (normalizedCardCategory === normalizedCategory) {
+                    if (isSpecialCategory
+                        ? imageSource.startsWith(normalizedCategory === 'new arrivals' ? 'new arrivals/' : 'best sellers/')
+                        : normalizedCardCategory === normalizedCategory) {
                         wrapper.style.display = '';
                     } else {
                         wrapper.style.display = 'none';
@@ -347,7 +351,7 @@ if (document.body.dataset.page === 'index') {
 
                 if (!currentCategory) return;
 
-                const normalizedCurrent = normalize(currentCategory);
+                    const normalizedCurrent = normalize(currentCategory);
 
                 buttons.forEach(btn => {
 
@@ -1136,82 +1140,6 @@ if (document.body.dataset.page === 'home') {
             const x = e.pageX - scrollContainer.getBoundingClientRect().left;
             const walk = (x - startX) * 1.5;
             scrollContainer.scrollLeft = scrollLeft - walk;
-        });
-    })();
-
-    (() => {
-        document.addEventListener('DOMContentLoaded', () => {
-            const buttons = document.querySelectorAll('.category-filter');
-
-            // ❗ Only cards NOT inside .no-filter
-            const cardElements = Array.from(
-                document.querySelectorAll('.card')
-            ).filter(card => !card.closest('.no-filter'));
-
-            if (!buttons.length) {
-                console.warn('No .category-filter buttons found.');
-                return;
-            }
-
-            function findWrapper(card) {
-                return card.closest('[class*="col-"]') || card.parentElement || card;
-            }
-
-            // 🔒 Hide only filterable cards on load
-            cardElements.forEach(card => {
-                const wrapper = findWrapper(card);
-                if (wrapper) wrapper.style.display = 'none';
-            });
-
-            function normalize(str) {
-                return (str || '')
-                    .toString()
-                    .normalize('NFKC')
-                    .replace(/\s+/g, ' ')
-                    .trim()
-                    .toLowerCase();
-            }
-
-            function onClickHandler(e) {
-                e.preventDefault();
-                const btn = e.currentTarget;
-                const category = (btn.dataset.category || '').trim();
-
-                buttons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const nCat = normalize(category);
-
-                cardElements.forEach(card => {
-                    const wrapper = findWrapper(card);
-                    if (!wrapper) return;
-
-                    const cardCategory = card.dataset.category || '';
-                    let matched = false;
-
-                    if (category === 'All' || category === '') {
-                        matched = true;
-                    } else if (cardCategory) {
-                        matched = normalize(cardCategory).includes(nCat);
-                    } else {
-                        const img = card.querySelector('img');
-                        const src = img ? img.getAttribute('src') : '';
-                        matched = normalize(src).includes(nCat);
-                    }
-
-                    wrapper.style.display = matched ? '' : 'none';
-                });
-
-                // Close offcanvas (mobile)
-                try {
-                    const off = document.getElementById('sidebarMenu');
-                    if (off && window.bootstrap?.Offcanvas) {
-                        bootstrap.Offcanvas.getInstance(off)?.hide();
-                    }
-                } catch { }
-            }
-
-            buttons.forEach(btn => btn.addEventListener('click', onClickHandler));
         });
     })();
 

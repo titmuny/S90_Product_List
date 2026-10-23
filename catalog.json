@@ -1,11 +1,28 @@
 {
   "version": 1,
-  "products": [],
+  "products": [
+    {
+      "sku": "ada01121aa",
+      "name": "test តេស",
+      "category": "New Arrivals",
+      "price": "1.00",
+      "items": [
+        {
+          "name": "s",
+          "price": "1"
+        }
+      ],
+      "image": "uploads/products/ada01121aa-mvkg8b29.jpg",
+      "visible": true,
+      "createdAt": "2026-10-23T04:07:27.490Z",
+      "updatedAt": "2026-10-23T04:07:27.490Z"
+    }
+  ],
   "overrides": {
     "9999": {
       "hidden": true,
       "updatedAt": "2026-10-18T05:02:58.910Z"
     }
   },
-  "updatedAt": "2026-10-18T05:02:58.910Z"
+  "updatedAt": "2026-10-23T04:07:27.490Z"
 }
