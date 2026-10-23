@@ -2,9 +2,9 @@
   "version": 1,
   "products": [
     {
-      "sku": "ada01121aa",
+      "sku": "iron00024asd",
       "name": "test តេស",
-      "category": "New Arrivals",
+      "category": "ដែក-Iron",
       "price": "1.00",
       "items": [
         {
@@ -15,7 +15,7 @@
       "image": "uploads/products/ada01121aa-mvkg8b29.jpg",
       "visible": true,
       "createdAt": "2026-10-23T04:07:27.490Z",
-      "updatedAt": "2026-10-23T04:07:27.490Z"
+      "updatedAt": "2026-10-23T04:23:44.040Z"
     }
   ],
   "overrides": {
@@ -24,5 +24,5 @@
       "updatedAt": "2026-10-18T05:02:58.910Z"
     }
   },
-  "updatedAt": "2026-10-23T04:07:27.490Z"
+  "updatedAt": "2026-10-23T04:23:44.040Z"
 }
