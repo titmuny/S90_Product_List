@@ -1,8 +1,13 @@
 {
   "version": 1,
   "products": [],
-  "overrides": {},
-  "updatedAt": "2026-10-29T01:50:47.285Z",
+  "overrides": {
+    "MTSP0040A": {
+      "showPrice": false,
+      "updatedAt": "2026-10-31T04:42:32.382Z"
+    }
+  },
+  "updatedAt": "2026-10-31T04:42:32.382Z",
   "settings": {
     "showPrices": true
   }
