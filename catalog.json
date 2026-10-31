@@ -5,9 +5,13 @@
     "MTSP0040A": {
       "showPrice": false,
       "updatedAt": "2026-10-31T04:42:32.382Z"
+    },
+    "ADA00024": {
+      "showPrice": false,
+      "updatedAt": "2026-10-31T04:43:18.431Z"
     }
   },
-  "updatedAt": "2026-10-31T04:42:32.382Z",
+  "updatedAt": "2026-10-31T04:43:18.431Z",
   "settings": {
     "showPrices": true
   }
